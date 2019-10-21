@@ -64,17 +64,17 @@
 <script>
     function initMap() {
         var bounds = new google.maps.LatLngBounds();
-        var officePos = {lat: 50.438284, lng: 30.515339};
+        var Malatya = {lat: 38.3554749, lng: 38.332655};
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
-            center: officePos
+            zoom: 14,
+            center: Malatya
         });
-        var markerOffice = new google.maps.Marker({
-            position: officePos,
-            map: map,
-            label: 'A'
-        });
-        bounds.extend(markerOffice.position);
+        // var markerOffice = new google.maps.Marker({
+        //     position: officePos,
+        //     map: map,
+        //     label: 'S'
+        // });
+        // bounds.extend(markerOffice.position);
 
         navigator.geolocation.getCurrentPosition(
             function(position) {
@@ -82,7 +82,7 @@
                 var markerCurreintPos = new google.maps.Marker({
                     position: currentPos,
                     map: map,
-                    label: 'B'
+                    label: 'Your current location'
                 });
                 bounds.extend(markerCurreintPos.position);
                 map.fitBounds(bounds);
