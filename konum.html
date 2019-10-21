@@ -1,0 +1,96 @@
+<!-- <!DOCTYPE html>
+<html>
+    <body>
+        <p id="KUL_DENE">KULLANICI KONUMU:</p>
+        <button onclick="getuserLocation()"> KONUM KONTROL</button>
+        <div id="HAR_DENE"></div>
+        <div id="1"></div>
+        <script>
+            var x=document.getElementById("KUL_DENE");
+            function getuserLocation(){
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showuserPosition,showbrowserError);
+                }
+                else{
+                    x.innerHTML="TARAYICI GEOLOCATION I DESTEKLEMIYOR";
+                }
+            }
+       
+        function showuserPosition(position) {
+            var latlon=position.coords.latitude+","+position.coords.longitude;
+            var img_url="http://maps.googleapis.com/maps/api/staticmap?center="
+            +latlon+"&zoom=14&size=400x300&sensor=false";
+            document.getElementById("HAR_DENE").innerHTML="<img src='"+img_url+"'>";
+            document.getElementById("1").innerHTML=latlon;
+        }
+
+        function showbrowserError(error){
+            switch(error.code)
+            {
+                case error.PERMISSION_DENIED:
+                x.innerHTML="KULLANICI GEOLOCATION TALEBINI REDDETTI"
+                break;
+                case error.POSITION_UNAVAILABLE:
+                x.innerHTML="KONUM BILGISI YOK"
+                break;
+                case error.TIMEOUT:
+                x.innerHTML="ZAMAN ASIMI"
+                break;
+                case error.UNKNOWN_ERROR:
+                x.innerHTML="BILINMEYEN HATA"
+                break;
+            }
+        }
+        </script>
+    </body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>How to get to our office?</title>
+</head>
+<body>
+<style type="text/css">
+    html, body {
+        margin: 0;
+    }
+    #map {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+</style>
+<div id="map"></div>
+<script>
+    function initMap() {
+        var bounds = new google.maps.LatLngBounds();
+        var officePos = {lat: 50.438284, lng: 30.515339};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: officePos
+        });
+        var markerOffice = new google.maps.Marker({
+            position: officePos,
+            map: map,
+            label: 'A'
+        });
+        bounds.extend(markerOffice.position);
+
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                var currentPos = {lat: position.coords.latitude, lng: position.coords.longitude};
+                var markerCurreintPos = new google.maps.Marker({
+                    position: currentPos,
+                    map: map,
+                    label: 'B'
+                });
+                bounds.extend(markerCurreintPos.position);
+                map.fitBounds(bounds);
+                map.panToBounds(bounds);
+            }
+        )
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"&quot; async defer></script>
+</body>
+</html>
