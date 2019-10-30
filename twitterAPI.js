@@ -11,27 +11,31 @@ var Twitter = new twit({
 
 //retweeters
 
-// var getRtweeters = function () {
-//     var params = {
-//         id: 123, count: 4
+var getRtweeters = function (id1) {
+    // id1 = "\'" + id1 + "\'";
+    var params = {
+        id: id1, count: 15
 
-//     }
-//     console.log("basliyor");
-//     Twitter.get('statuses/retweets', params, function (err, data) {
-//         if (err) {
-//             console.log("error", err);
-//         }
-//         else {
-//             console.log("cekilen data", data);
-//         }
+    }
+    console.log("basliyor");
+    Twitter.get('statuses/retweets', params, function (err, data) {
+        if (err) {
+            console.log("error", err);
+        }
+        else {
+            console.log("cekilen data", data.length);
+            data.forEach(element => {
+                console.log(element.user.name)
+            });
+        }
 
-//     });
-// };
+    });
+};
 // getRtweeters();
 
 //end of retweeters
 
-    //retweet//
+//retweet//
 
 // var retweet = function () {
 //     var params = {
@@ -66,31 +70,37 @@ var Twitter = new twit({
 
 // retweet();
 
-    //end od retweet
+//end od retweet
 
-    //search of tweets
-// Twitter.get('search/tweets', {
-//     q: '#vtys123456',
+//search of tweets
+Twitter.get('search/tweets', {
+    q: '#إبادة_الأرمن',
+    count: 100,
+    result_type: "mixed"
+}).catch(function (err) {
+    console.log('caught error', err.stack)
+}).then(function (result) {
+    result.data.statuses.forEach(element => {
+        if (element.user.name === "العربية") {
+            console.log('data', element.id_str);
+            getRtweeters(element.id_str);
+        }
+    });
+
+});
+//end
+
+//search of users
+// Twitter.get('users/search', {
+//     q: '@Hassan_sham94',//can be Id or name
 //     count: 100,
 //     result_type: "mixed" 
 //   }).catch(function (err) {
 //     console.log('caught error', err.stack)
 //   }).then(function (result) {
-//      console.log('data', result.data);
+//      console.log('data', result.data[0].name);
 //   });
-  //end
-
-      //search of users
-Twitter.get('users/search', {
-    q: '@Hassan_sham94',//can be Id or name
-    count: 100,
-    result_type: "mixed" 
-  }).catch(function (err) {
-    console.log('caught error', err.stack)
-  }).then(function (result) {
-     console.log('data', result.data[0].name);
-  });
-  //end
+//end
 
 
 // post a new tweet//
