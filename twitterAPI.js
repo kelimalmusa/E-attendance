@@ -1,5 +1,6 @@
 const http = require('http');
 var twit = require("twit");
+var fs = require("fs");
 var Twitter = new twit({
     consumer_key: 'QrSELxABo1TSwl0Bpr6DV9VK4',
     consumer_secret: 'yFsBhyYfVhenZwjLw5Okl2PdTWGjUH8czLGlCfnYabVlwLr8fp',
