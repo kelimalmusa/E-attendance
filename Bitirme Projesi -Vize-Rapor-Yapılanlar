@@ -1,25 +1,35 @@
 Projemiz ; Twitter üzerinden entegre edilen bir yoklama ve test sistemidir.
 ilk Problem : Yoklama sistemimiz için her kişi adına  çekmek istediğimiz gerçek ve eş zamanlı olan lokasyon bilgisine erişmek.
 Çözümü: Anlık konum bilgisi verisinde, kendini kanıtlamış bir platform olan Twitter üzerinden gerekli lokasyon bilgisine erişmek.
+
 2.Problem: Twitter üzerinden lokasyona bilgilerine erişmek için Twitter'dan bir takım izinlerin alınması ve yine Twitter tarafından yetkilendirilmenin gerekmesiydi.
 Çözümü:
 --Twitter Developer 'de bir hesap oluşturmak
 --Yetkilendirilmek ve gerekli tokenler için Twitter'e başvuru yapılması
 --Kabul edilen başvuru için yetkilendirilme isteğimizin sebepleri ve projemizde kullanım yerinin açıklanması...
 Bu adımların sonucunda olumlu bir geri dönüş ile Twitter tarafından yetkilendirildik ve gerekli tokenlara ulaştık...
+
 3.Problem: Alınan yetkilendirilme ile Twitter üzerinden lokasyon bilgisine nasıl erişebileceğimizin yollarını düşünmek.
 Çözümü:
 --Sınıf içerisinden Hocanın attığı tweet'i sınıf içinden anlık bir fotoğraf eşliğinde retweetlemek.
 --Twitter kullanıcısı olan her öğrencinin anlık olarak sınıftan belli bir hashtag üzerinden fotoğraflı tweet atması.
+
 4.Problem:
-Twitter uygulamasında bir tweet'i resimli bir şekilde retweetlerken anlık konum bilgisi hizmetinin sunulmaması..Bu hizmet eksikliğinden dolayı bu yoldan vazgeçtik.
+Twitter uygulamasında bir tweet'i resimli bir şekilde retweetlerken anlık konum bilgisi hizmetinin sunulmaması..
+Bu hizmet eksikliğinden dolayı bu yoldan vazgeçtik.
+
 5.Problem:
-Twitter kullanıcısı olan her öğrenci belli bir hashtag üzerinden attığı tweet 'ten  en doğru ve eş zamanlı konum bilgisi alımında bir takım problemler ve eksikliklerin oluşması.
+Twitter kullanıcısı olan her öğrenci belli bir hashtag üzerinden attığı tweet 'ten  en doğru ve eş zamanlı konum 
+bilgisi alımında bir takım problemler ve eksikliklerin oluşması.
+
 Karşılaşılan Eksiklikler:
-*)Anlık tweet atarken sınıfta olduğuna dair fotoğraf çekilip konum eklemeye çalışıldığında eğer google mapst'te konum doğru değilse ve güncellenmediyse  twitter'in doğru konum getirememesi; 
- Çözümü: Anlık resimli tweet atmadan önce google map'i açıp konumu güncellemek böylece twitter konumu doğru bir şekilde getrir (doğru konumdan);
+*)Anlık tweet atarken sınıfta olduğuna dair fotoğraf çekilip konum eklemeye çalışıldığında eğer google maps'te 
+konum doğru değilse ve güncellenmediyse  twitter'in doğru konum getirememesi; 
+ Çözümü: Anlık resimli tweet atmadan önce google map'i açıp konumu güncellemek böylece twitter konumu doğru bir 
+ şekilde getrir (doğru konumdan);
 *) Hesabın  gizli olması durumunda  hesap sahibinin yaptığı aktivitelere ve hareketlere erişememek (retweet, tweet vb );
 -Çözümü:Hesabın açık ve gerekli konum bilgisi protokollerinin uygun ayarına getirilmesidir.
+
 *)Kullanılan bazı marka  mobil cihazların yapısındaki sensörlerin belli bir kalitede seviyesinden düşük olmasından dolayı konum bilgisinde ki minik kaymalar.
 
 --Şu ana kadar ki problemler ve çözümleri bu şekilde yapıldı ...ve Üzerinde hala çalışılıyor
