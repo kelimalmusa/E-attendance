@@ -75,21 +75,18 @@ var getRtweeters = function (id1) {
 
 //search of tweets
 Twitter.get('search/tweets', {
-    q: '#asdfg12345',
-    count: 100,
-    // result_type: "mixed"
+    q: '#CADOS123',
+    count: 1,
+    result_type: "mixed"
 }).catch(function (err) {
     console.log('caught error', err.stack)
 }).then(function (result) {
-    console.log("geo", result.data.statuses[0].geo);
-    console.log("coor", result.data.statuses[0].coordinates);
-    console.log("place", result.data.statuses[0].place);
-    console.log("user", result.data.statuses[0].user);
+    console.log("geo", result.data);
 
     result.data.statuses.forEach(element => {
         // if (element.user.name === "العربية") {
         //     console.log('data', element.id_str);
-        getRtweeters(element.id_str);
+        // getRtweeters(element.id_str);
         // }
     });
 

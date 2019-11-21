@@ -83,14 +83,15 @@ Twitter.get('search/tweets', {
 }).catch(function (err: Error) {
     console.log('caught error', err.stack)
 }).then(function (result: any) {
-    result.data.statuses.forEach((element: any) => {
-        // if (element.user.name === "العربية") {
-            console.log('name', element.user.name);
-            console.log('data', element.geo);
-            // getRtweeters(element.name);
-        // }
-    });
-
+    console.log(result.data);
+    // result.data.statuses.forEach((element: any) => {
+    //     // if (element.user.name === "العربية") {
+    //         console.log('name', element.user.name);
+    //         console.log('data', element.geo);
+    //         // getRtweeters(element.name);
+    //     // }
+       
+    // });
 });
 //end
 
