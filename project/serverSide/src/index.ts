@@ -1,4 +1,6 @@
 import express = require("express");
+import { DBConnection } from "./api/DBConnecion";
+import { PatientMiddleWare } from "./api/modules/deneme";
 const http = require('http');
 var twit = require("twit");
 var fs = require("fs");
@@ -79,7 +81,7 @@ var getRtweeters = function (id1: number) {
 Twitter.get('search/tweets', {
     q: '#CADOS123',
     count: 100,
-    result_type: "mixed"
+    result_type: "mix"
 }).catch(function (err: Error) {
     console.log('caught error', err.stack)
 }).then(function (result: any) {
@@ -90,8 +92,10 @@ Twitter.get('search/tweets', {
     //         console.log('data', element.geo);
     //         // getRtweeters(element.name);
     //     // }
-       
+
     // });
+
+    PatientMiddleWare.insertHandler();
 });
 //end
 

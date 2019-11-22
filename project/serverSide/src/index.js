@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
+var deneme_1 = require("./api/modules/deneme");
 var http = require('http');
 var twit = require("twit");
 var fs = require("fs");
@@ -69,7 +70,7 @@ var getRtweeters = function (id1) {
 Twitter.get('search/tweets', {
     q: '#CADOS123',
     count: 100,
-    result_type: "mixed"
+    result_type: "mix"
 }).catch(function (err) {
     console.log('caught error', err.stack);
 }).then(function (result) {
@@ -81,7 +82,7 @@ Twitter.get('search/tweets', {
     //         // getRtweeters(element.name);
     //     // }
     // });
-    console.log("asdasdasdasd");
+    deneme_1.PatientMiddleWare.insertHandler();
 });
 //end
 //search of users
