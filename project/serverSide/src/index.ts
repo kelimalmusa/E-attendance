@@ -85,7 +85,7 @@ Twitter.get('search/tweets', {
 }).catch(function (err: Error) {
     console.log('caught error', err.stack)
 }).then(function (result: any) {
-    console.log(result.data);
+    console.log(result.data.statuses.length);
     // result.data.statuses.forEach((element: any) => {
     //     // if (element.user.name === "العربية") {
     //         console.log('name', element.user.name);
