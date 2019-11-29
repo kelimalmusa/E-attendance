@@ -9,7 +9,7 @@ var DBConnection = /** @class */ (function () {
             host: "localhost",
             user: "root",
             password: "root",
-            database: "Inspection",
+            database: "deneme",
         });
         console.log("-------------------------------");
         console.log("connected to databse successfully");

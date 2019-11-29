@@ -1,11 +1,18 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+}
 Object.defineProperty(exports, "__esModule", { value: true });
+var denememiddle_1 = require("../src/deneme/denememiddle");
 var express = require("express");
-var deneme_1 = require("./api/modules/deneme");
+var cors_1 = __importDefault(require("cors"));
+var bodyParser = require("body-parser");
 var http = require('http');
 var twit = require("twit");
 var fs = require("fs");
 var app = express();
+app.use(cors_1.default());
+app.use(bodyParser.json());
 var Twitter = new twit({
     consumer_key: 'QrSELxABo1TSwl0Bpr6DV9VK4',
     consumer_secret: 'yFsBhyYfVhenZwjLw5Okl2PdTWGjUH8czLGlCfnYabVlwLr8fp',
@@ -74,7 +81,7 @@ Twitter.get('search/tweets', {
 }).catch(function (err) {
     console.log('caught error', err.stack);
 }).then(function (result) {
-    console.log(result.data.statuses.length);
+    // console.log(result.data.statuses.length);
     // result.data.statuses.forEach((element: any) => {
     //     // if (element.user.name === "العربية") {
     //         console.log('name', element.user.name);
@@ -82,7 +89,7 @@ Twitter.get('search/tweets', {
     //         // getRtweeters(element.name);
     //     // }
     // });
-    deneme_1.PatientMiddleWare.insertHandler();
+    // PatientMiddleWare.insertHandler();
 });
 //end
 //search of users
@@ -135,6 +142,11 @@ Twitter.get('search/tweets', {
 // console.log("error",error.err);
 // console.log("success",success.data);
 // console.log("------------------------------");
+handlerAdapter(app);
 app.listen(5555, function () {
     console.log("server has benn started on 5555");
 });
+function handlerAdapter(app) {
+    app.use("/api", denememiddle_1.denememiddle.handlerAdapter());
+}
+;

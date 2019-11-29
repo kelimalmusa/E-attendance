@@ -1,10 +1,17 @@
+import { denememiddle } from "../src/deneme/denememiddle"
 import express = require("express");
 import { DBConnection } from "./api/DBConnecion";
 import { PatientMiddleWare } from "./api/modules/deneme";
+import { deneme } from "../../models/deneme";
+import cors from "cors";
+import bodyParser = require("body-parser");
 const http = require('http');
 var twit = require("twit");
 var fs = require("fs");
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+
 var Twitter = new twit({
     consumer_key: 'QrSELxABo1TSwl0Bpr6DV9VK4',
     consumer_secret: 'yFsBhyYfVhenZwjLw5Okl2PdTWGjUH8czLGlCfnYabVlwLr8fp',
@@ -85,7 +92,7 @@ Twitter.get('search/tweets', {
 }).catch(function (err: Error) {
     console.log('caught error', err.stack)
 }).then(function (result: any) {
-    console.log(result.data.statuses.length);
+    // console.log(result.data.statuses.length);
     // result.data.statuses.forEach((element: any) => {
     //     // if (element.user.name === "العربية") {
     //         console.log('name', element.user.name);
@@ -95,7 +102,7 @@ Twitter.get('search/tweets', {
 
     // });
 
-    PatientMiddleWare.insertHandler();
+    // PatientMiddleWare.insertHandler();
 });
 //end
 
@@ -173,7 +180,10 @@ Twitter.get('search/tweets', {
 // console.log("------------------------------");
 
 
-
+handlerAdapter(app);
 app.listen(5555, () => {
     console.log("server has benn started on 5555");
-})
+});
+function handlerAdapter(app: express.Express) {
+    app.use("/api", denememiddle.handlerAdapter())
+};

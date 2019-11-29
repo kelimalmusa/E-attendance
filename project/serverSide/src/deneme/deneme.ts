@@ -1,6 +1,6 @@
 export class deneme {
-    private _name: string;
-    private _age: number;
+    private _name: string = "ahmet";
+    private _age: number = 15;
 
     /**
      * Getter name
