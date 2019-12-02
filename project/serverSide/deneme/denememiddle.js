@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
+var DBConnecion_1 = require("../src/api/DBConnecion");
 exports.denememiddle = {
     insertHandler: function (req, res) {
         console.log(req.body);
@@ -14,6 +15,14 @@ exports.denememiddle = {
                 x: "y"
             }
         };
+        var connection = DBConnecion_1.DBConnection.dbConnector();
+        connection.query("select * from deneme", function (err, res) {
+            if (err) {
+                console.log("err", err);
+            }
+            else
+                console.log(res.rows[4]);
+        });
         res.send(JSON.stringify(resultObject));
         console.log("sadsadsadsadsadsad");
     },

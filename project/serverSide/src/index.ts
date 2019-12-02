@@ -1,4 +1,4 @@
-import { denememiddle } from "../src/deneme/denememiddle"
+import { denememiddle } from "../deneme/denememiddle"
 import express = require("express");
 import { DBConnection } from "./api/DBConnecion";
 import { PatientMiddleWare } from "./api/modules/deneme";
