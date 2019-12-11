@@ -92,18 +92,19 @@ Twitter.get('search/tweets', {
 }).catch(function (err: Error) {
     console.log('caught error', err.stack)
 }).then(function (result: any) {
-    // console.log(result.data.statuses.length);
-    // result.data.statuses.forEach((element: any) => {
-    //     // if (element.user.name === "العربية") {
-    //         console.log('name', element.user.name);
-    //         console.log('data', element.geo);
-    //         // getRtweeters(element.name);
-    //     // }
+    console.log(result.data.statuses.length);
+    result.data.statuses.forEach((element: any) => {
+        //     // if (element.user.name === "العربية") {
+        console.log('name', element.user.name);
+        console.log('data', element.geo);
+        //         // getRtweeters(element.name);
+    }
 
-    // });
-
-    // PatientMiddleWare.insertHandler();
+    )
 });
+
+// PatientMiddleWare.insertHandler();
+
 //end
 
 //search of users
@@ -184,6 +185,7 @@ handlerAdapter(app);
 app.listen(5555, () => {
     console.log("server has benn started on 5555");
 });
+
 function handlerAdapter(app: express.Express) {
     app.use("/api", denememiddle.handlerAdapter())
 };

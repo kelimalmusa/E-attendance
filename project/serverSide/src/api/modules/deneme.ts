@@ -8,15 +8,15 @@ export const PatientMiddleWare = {
     insertHandler() {
 
         const connection = DBConnection.dbConnector();
+        // connection.execute(
+        //     "insert into deneme (name,age) values (?,?);",
+        //     [
+        //         "ahmet",
+        //         26
+        //     ],
+        // );
         connection.execute(
-            "insert into deneme (name,age) values (?,?);",
-            [
-                "ahmet",
-                26
-            ],
-        );
-        connection.execute(
-            "insert into deneme (name,age) values (?,?);",
+            "insert into deneme (name,age) values ($1,$2);",
             [
                 "mehmet",
                 62

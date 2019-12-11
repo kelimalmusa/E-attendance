@@ -5,11 +5,14 @@ var DBConnecion_1 = require("../DBConnecion");
 exports.PatientMiddleWare = {
     insertHandler: function () {
         var connection = DBConnecion_1.DBConnection.dbConnector();
-        connection.execute("insert into deneme (name,age) values (?,?);", [
-            "ahmet",
-            26
-        ]);
-        connection.execute("insert into deneme (name,age) values (?,?);", [
+        // connection.execute(
+        //     "insert into deneme (name,age) values (?,?);",
+        //     [
+        //         "ahmet",
+        //         26
+        //     ],
+        // );
+        connection.execute("insert into deneme (name,age) values ($1,$2);", [
             "mehmet",
             62
         ]);
