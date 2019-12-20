@@ -40,7 +40,7 @@ Vizeden sonra Finale doğru yapılanlar ....(Güncellemeler ve yenililker)
 
 2.)Karar verilen veritabanı sonrasında projemizin  ana hatları ve tabloları belirlendi ve tablolar gerçekleştirildi.
 
-1.Problem:Proje çalışmaları esnasında daha önce ki zamanlarda belirlenen hashtaga atılan tweetlere ulaşmak , çekmek istediğimizde minimum  20 gün  öncesinden atılan tweetlere ulaşamadık
+1.Problem:Proje çalışmaları esnasında daha önce ki zamanlarda belirlenen hashtaga atılan tweetlere ulaşmak , çekmek istediğimizde maksimum  20 gün  öncesinden atılan tweetlere ulaşamadık
 Sebebi: Twitter'in uyguladığı ve koyduğu sınırdan dolayı..
 
 Çözümü:Bu gün ve geçmişe dair atılan tweetleri kaybetmemek ve en doğru ,en etik çalışma ortamı için atılan her tweeti koruma altına almalıydık.
