@@ -51,7 +51,7 @@ Bu nedenle veritabanımıza "tweet" adlı tabloyu ekledik...Bunun sonucunda
 *devamsizlik
 *ogrenci
 adlı tablolarımız oluştruldu ve aralarında ki ilişkiyi içeren ER modeli yapıldı 
-ER modeline bu linkten ulaşabilirsiniz lütfen :  https://github.com/kelimalmusa/BitirmeProjesi/blob/master/project/ERModel%20g%C3%BCncel.png
+ER modeline bu linkten ulaşabilirsiniz lütfen :  <a>https://github.com/kelimalmusa/BitirmeProjesi/blob/master/project/ERModel%20g%C3%BCncel.png</a>
 
 Gerekli yenilikler ve değişiklikler yapıldı ...Artık kodlama aşaması için hazır hale gelmiş bulunmaktayız...
 
