@@ -30,6 +30,33 @@ konum doğru değilse ve güncellenmediyse  twitter'in doğru konum getirememesi
 *) Hesabın  gizli olması durumunda  hesap sahibinin yaptığı aktivitelere ve hareketlere erişememek (retweet, tweet vb );
 -Çözümü:Hesabın açık ve gerekli konum bilgisi protokollerinin uygun ayarına getirilmesidir.
 
-*)Kullanılan bazı marka  mobil cihazların yapısındaki sensörlerin belli bir kalitede seviyesinden düşük olmasından dolayı konum bilgisinde ki minik kaymalar.
+*)Kullanılan bazı marka  mobil cihazların yapısındaki sensörlerin belli bir kalite seviyesinden düşük olmasından dolayı konum bilgisinde ki minik kaymalar.
 
 --Şu ana kadar ki problemler ve çözümleri bu şekilde yapıldı ...ve Üzerinde hala çalışılıyor
+*************************************************************************************************************************************************************************
+Vizeden sonra Finale doğru yapılanlar ....(Güncellemeler ve yenililker)
+
+1.)Projemizin  veritabanı için DBeaver editörlüğünde MYSQL veritabanını kullanmaya karar almıştık fakat daha sonra Hocamız Ahmet Arif ile daha verimli bir çalışma adına yine DBeaver editörlüğünde Postgresql veritabanını kullanmaya başladık.
+
+2.)Karar verilen veritabanı sonrasında projemizin  ana hatları ve tabloları belirlendi ve tablolar gerçekleştirildi.
+
+1.Problem:Proje çalışmaları esnasında daha önce ki zamanlarda belirlenen hashtaga atılan tweetlere ulaşmak , çekmek istediğimizde minimum  20 gün  öncesinden atılan tweetlere ulaşamadık
+Sebebi: Twitter'in uyguladığı ve koyduğu sınırdan dolayı..
+
+Çözümü:Bu gün ve geçmişe dair atılan tweetleri kaybetmemek ve en doğru ,en etik çalışma ortamı için atılan her tweeti koruma altına almalıydık.
+Bu nedenle veritabanımıza "tweet" adlı tabloyu ekledik...Bunun sonucunda 
+*ders
+*hoca
+*tweet
+*devamsizlik
+*ogrenci
+adlı tablolarımız oluştruldu ve aralarında ki ilişkiyi içeren ER modeli yapıldı 
+ER modeline bu linkten ulaşabilirsiniz lütfen :  https://github.com/kelimalmusa/BitirmeProjesi/blob/master/project/ERModel%20g%C3%BCncel.png
+
+Gerekli yenilikler ve değişiklikler yapıldı ...Artık kodlama aşaması için hazır hale gelmiş bulunmaktayız...
+
+
+
+
+
+
