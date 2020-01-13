@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-var denememiddle_1 = require("../deneme/denememiddle");
+var denemeMiddleWare_1 = require("../modules/denemeMiddleWare");
 var express = require("express");
 var cors_1 = __importDefault(require("cors"));
 var bodyParser = require("body-parser");
@@ -146,6 +146,6 @@ app.listen(5555, function () {
     console.log("server has benn started on 5555");
 });
 function handlerAdapter(app) {
-    app.use("/api", denememiddle_1.denememiddle.handlerAdapter());
+    app.use("/api", denemeMiddleWare_1.denemeMiddleWare.handlerAdapter());
 }
 ;

@@ -1,8 +1,5 @@
-import { denememiddle } from "../deneme/denememiddle"
+import { denemeMiddleWare } from "../modules/denemeMiddleWare";
 import express = require("express");
-import { DBConnection } from "./api/DBConnecion";
-import { PatientMiddleWare } from "./api/modules/deneme";
-import { deneme } from "../../models/deneme";
 import cors from "cors";
 import bodyParser = require("body-parser");
 const http = require('http');
@@ -187,5 +184,5 @@ app.listen(5555, () => {
 });
 
 function handlerAdapter(app: express.Express) {
-    app.use("/api", denememiddle.handlerAdapter())
+    app.use("/api", denemeMiddleWare.handlerAdapter())
 };

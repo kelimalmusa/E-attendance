@@ -5,7 +5,7 @@ export class DBConnection {
         const pool = new Pool({
             user: 'postgres',
             host: 'localhost',
-            database: 'postgres',
+            database: 'Attendance',
             password: 'root',
             port: 5432,
         });
