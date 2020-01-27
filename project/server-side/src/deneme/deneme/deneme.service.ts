@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
+import { deneme } from "../../../../models/deneme";
 
 import * as twit from "twit";
 import { promises } from "dns";
@@ -18,11 +19,14 @@ export const Twitter = new twit({
 export class DenemeService {
   constructor(private dbs: DatabaseService) {}
 
-  saveToDatabase(name: string, age: number): Promise<any> {
+  saveToDatabase(deneme): Promise<any> {
     return new Promise((resolve, reject) => {
       this.dbs
         .getPool()
-        .query("insert into deneme(name, age)values($1, $2)", [name, age])
+        .query("insert into deneme(name, age)values($1, $2)", [
+          deneme.name,
+          deneme.age
+        ])
         .then(result => {
           if (!result.rowCount) {
             return reject();
@@ -61,7 +65,7 @@ export class DenemeService {
         .query("select * from deneme")
         .then(result => {
           console.log(result.rows);
-          resolve();
+          resolve(result);
         })
         .catch(e => {
           console.error(e);
