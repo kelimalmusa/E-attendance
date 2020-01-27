@@ -16,8 +16,10 @@ export class AppComponent {
   save() {
     this.deneme.name = "CAFER";
     this.deneme.age = 255;
-    this.http.post("http://localhost:5555/api/deneme", this.deneme).subscribe((asd) => {
+    this.http.post("http://localhost:3000/api/deneme", this.deneme).subscribe((asd) => {
       console.log("sonuc,", new Date());
     });
   }
+
 }
+

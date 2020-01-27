@@ -1,142 +1,0 @@
-PGDMP
-\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
-\00\00\00\00w\00\00\00\00\00\00\00\00\00
-\00\00\00attendance\00%\00\00\0010.10 (Ubuntu 10.10-0ubuntu0.18.04.1)\00%\00\00\0010.10 (Ubuntu 10.10-0ubuntu0.18.04.1)\00\00\00\00\00\8E\00\00\00\00\00\00\00\00\00\00\000\00\00\00\000\00\00\00\00ENCODING\00\00\00\00ENCODING\00\00\00\00\00\00\00\00SET client_encoding = 'UTF8';
-\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00false\00\00\00\00\00\00\00\00\00\00\00\00\8F\00\00\00\00\00\00\00\00\00\00\000\00\00\00\000\00
-\00\00\00STDSTRINGS\00
-\00\00\00STDSTRINGS\00\00\00\00\00(\00\00\00SET standard_conforming_strings = 'on';
-\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00false\00\00\00\00\00\00\00\00\00\00\00\00\90\00\00\00\00\00\00\00\00\00\00\000\00\00\00\000\00
-\00\00\00SEARCHPATH\00
-\00\00\00SEARCHPATH\00\00\00\00\008\00\00\00SELECT pg_catalog.set_config('search_path', '', false);
-\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00false\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\002615\00\00\00\002200\00\00\00\00public\00\00\00\00SCHEMA\00\00\00\00\00\00\00\00CREATE SCHEMA public;
-\00\00\00\00DROP SCHEMA public;
-\00\00\00\00\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00\00\00\00\00\00\00\00\00\91\00\00\00\00\00\00\00\00\00\00\000\00\00\00\000\00
-\00\00\00SCHEMA public\00\00\00\00COMMENT\00\00\00\00\006\00\00\00COMMENT ON SCHEMA public IS 'standard public schema';
-\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\003\00\00\00\00\00\00\00\00\00\00\00\00\C5\00\00\00\00\00\00\00\00\00\00\00\001259\00\00\00\0016448\00\00\00\00ders\00\00\00\00TABLE\00\00\00\00\00@\00\00CREATE TABLE public.ders (
-    ders_id integer NOT NULL,
-    ders_code character varying,
-    ders_name character varying,
-    ders_sube character varying,
-    ders_haftalik_saat integer,
-    ders_uygulama boolean,
-    ders_baslangic_saat character varying,
-    ders_hoca_id integer,
-    ders_salon character varying
-);
-\00\00\00\00DROP TABLE public.ders;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\003\00\00\00\00\00\00\00\00\00\00\00\00\C7\00\00\00\00\00\00\00\00\00\00\00\001259\00\00\00\0016473\00\00\00\00devamsizlik\00\00\00\00TABLE\00\00\00\00\00\CF\00\00\00CREATE TABLE public.devamsizlik (
-    id integer NOT NULL,
-    ogr_id integer,
-    ders_id integer,
-    tweet_id character varying,
-    islem_location character varying,
-    islem_tairh character varying
-);
-\00\00\00\00DROP TABLE public.devamsizlik;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\003\00\00\00\00\00\00\00\00\00\00\00\00\C6\00\00\00\00\00\00\00\00\00\00\00\001259\00\00\00\0016458\00\00\00\00hoca\00\00\00\00TABLE\00\00\00\00\00\A2\00\00\00CREATE TABLE public.hoca (
-    hoca_id integer NOT NULL,
-    hoca_name character varying,
-    hoca_surname character varying,
-    hoca_title character varying
-);
-\00\00\00\00DROP TABLE public.hoca;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\003\00\00\00\00\00\00\00\00\00\00\00\00\C4\00\00\00\00\00\00\00\00\00\00\00\001259\00\00\00\0016420\00\00\00\00ogrenci\00\00\00\00TABLE\00\00\00\00\00\00\00CREATE TABLE public.ogrenci (
-    ogr_id integer NOT NULL,
-    ogr_no integer,
-    ogr_name character varying,
-    ogr_surname character varying,
-    ogr_user_id character varying,
-    ogr_username character varying,
-    ogr_ogrenim_turu character varying(10)
-);
-\00\00\00\00DROP TABLE public.ogrenci;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\003\00\00\00\00\00\00\00\00\00\00\00\00\C8\00\00\00\00\00\00\00\00\00\00\00\001259\00\00\00\0016493\00\00\00\00tweet\00\00\00\00TABLE\00\00\00\00\00p\00\00\00CREATE TABLE public.tweet (
-    id integer NOT NULL,
-    tweet json,
-    ogr_id integer,
-    ders_id integer
-);
-\00\00\00\00DROP TABLE public.tweet;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\003\00\00\00\00\00\00\00\00\00\00\00\00\88\00\00\00\00\00\00\00\00\00\000\00\00\00\0016448\00\00\00\00ders\00
-\00\00\00TABLE DATA\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\9A\00\00\00COPY public.ders (ders_id, ders_code, ders_name, ders_sube, ders_haftalik_saat, ders_uygulama, ders_baslangic_saat, ders_hoca_id, ders_salon) FROM stdin;
-\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00197\00\00\00\00\00\00\00\00\00\00\00\00\8A\00\00\00\00\00\00\00\00\00\000\00\00\00\0016473\00\00\00\00devamsizlik\00
-\00\00\00TABLE DATA\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00a\00\00\00COPY public.devamsizlik (id, ogr_id, ders_id, tweet_id, islem_location, islem_tairh) FROM stdin;
-\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00199\00\00\00\00\00\00\00\00\00\00\00\00\89\00\00\00\00\00\00\00\00\00\000\00\00\00\0016458\00\00\00\00hoca\00
-\00\00\00TABLE DATA\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00L\00\00\00COPY public.hoca (hoca_id, hoca_name, hoca_surname, hoca_title) FROM stdin;
-\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00198\00\00\00\00\00\00\00\00\00\00\00\00\87\00\00\00\00\00\00\00\00\00\000\00\00\00\0016420\00\00\00\00ogrenci\00
-\00\00\00TABLE DATA\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00u\00\00\00COPY public.ogrenci (ogr_id, ogr_no, ogr_name, ogr_surname, ogr_user_id, ogr_username, ogr_ogrenim_turu) FROM stdin;
-\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00196\00\00\00\00\00\00\00\00\00\00\00\00\8B\00\00\00\00\00\00\00\00\00\000\00\00\00\0016493\00\00\00\00tweet\00
-\00\00\00TABLE DATA\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00;\00\00\00COPY public.tweet (id, tweet, ogr_id, ders_id) FROM stdin;
-\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00200\00\00\00\00\00\00\00\00\00\00\00\00\FC
-\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016455\00\00\00\00ders ders_pk\00
-\00\00\00CONSTRAINT\00\00\00\00\00O\00\00\00ALTER TABLE ONLY public.ders
-    ADD CONSTRAINT ders_pk PRIMARY KEY (ders_id);
-\006\00\00\00ALTER TABLE ONLY public.ders DROP CONSTRAINT ders_pk;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00197\00\00\00\00\00\00\00\00\00\00\00\00\FE
-\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016457\00\00\00\00ders ders_un\00
-\00\00\00CONSTRAINT\00\00\00\00\00J\00\00\00ALTER TABLE ONLY public.ders
-    ADD CONSTRAINT ders_un UNIQUE (ders_id);
-\006\00\00\00ALTER TABLE ONLY public.ders DROP CONSTRAINT ders_un;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00197\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016480\00\00\00\00devamsizlik devamsizlik_pk\00
-\00\00\00CONSTRAINT\00\00\00\00\00X\00\00\00ALTER TABLE ONLY public.devamsizlik
-    ADD CONSTRAINT devamsizlik_pk PRIMARY KEY (id);
-\00D\00\00\00ALTER TABLE ONLY public.devamsizlik DROP CONSTRAINT devamsizlik_pk;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00199\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016482\00\00\00\00devamsizlik devamsizlik_un\00
-\00\00\00CONSTRAINT\00\00\00\00\00S\00\00\00ALTER TABLE ONLY public.devamsizlik
-    ADD CONSTRAINT devamsizlik_un UNIQUE (id);
-\00D\00\00\00ALTER TABLE ONLY public.devamsizlik DROP CONSTRAINT devamsizlik_un;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00199\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016465\00\00\00\00hoca hoca_pk\00
-\00\00\00CONSTRAINT\00\00\00\00\00O\00\00\00ALTER TABLE ONLY public.hoca
-    ADD CONSTRAINT hoca_pk PRIMARY KEY (hoca_id);
-\006\00\00\00ALTER TABLE ONLY public.hoca DROP CONSTRAINT hoca_pk;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00198\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016467\00\00\00\00hoca hoca_un\00
-\00\00\00CONSTRAINT\00\00\00\00\00J\00\00\00ALTER TABLE ONLY public.hoca
-    ADD CONSTRAINT hoca_un UNIQUE (hoca_id);
-\006\00\00\00ALTER TABLE ONLY public.hoca DROP CONSTRAINT hoca_un;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00198\00\00\00\00\00\00\00\00\00\00\00\00\F6
-\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016434\00\00\00\00ogrenci ogrenci_pk\00
-\00\00\00CONSTRAINT\00\00\00\00\00T\00\00\00ALTER TABLE ONLY public.ogrenci
-    ADD CONSTRAINT ogrenci_pk PRIMARY KEY (ogr_id);
-\00<\00\00\00ALTER TABLE ONLY public.ogrenci DROP CONSTRAINT ogrenci_pk;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00196\00\00\00\00\00\00\00\00\00\00\00\00\F8
-\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016436\00\00\00\00ogrenci ogrenci_un\00
-\00\00\00CONSTRAINT\00\00\00\00\00O\00\00\00ALTER TABLE ONLY public.ogrenci
-    ADD CONSTRAINT ogrenci_un UNIQUE (ogr_id);
-\00<\00\00\00ALTER TABLE ONLY public.ogrenci DROP CONSTRAINT ogrenci_un;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00196\00\00\00\00\00\00\00\00\00\00\00\00\FA
-\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016438\00\00\00\00ogrenci ogrenci_un1\00
-\00\00\00CONSTRAINT\00\00\00\00\00P\00\00\00ALTER TABLE ONLY public.ogrenci
-    ADD CONSTRAINT ogrenci_un1 UNIQUE (ogr_no);
-\00=\00\00\00ALTER TABLE ONLY public.ogrenci DROP CONSTRAINT ogrenci_un1;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00196\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016500\00\00\00\00tweet tweet_pk\00
-\00\00\00CONSTRAINT\00\00\00\00\00L\00\00\00ALTER TABLE ONLY public.tweet
-    ADD CONSTRAINT tweet_pk PRIMARY KEY (id);
-\008\00\00\00ALTER TABLE ONLY public.tweet DROP CONSTRAINT tweet_pk;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00200\00\00\00\00\00\00\00\00\00\00\00\00	\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016468\00\00\00\00ders ders_fk\00
-\00\00\00FK CONSTRAINT\00\00\00\00\00t\00\00\00ALTER TABLE ONLY public.ders
-    ADD CONSTRAINT ders_fk FOREIGN KEY (ders_hoca_id) REFERENCES public.hoca(hoca_id);
-\006\00\00\00ALTER TABLE ONLY public.ders DROP CONSTRAINT ders_fk;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\002816\00\00\00\00197\00\00\00\00198\00\00\00\00\00\00\00\00\00\00\00\00
-\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016483\00\00\00\00devamsizlik devamsizlik_fk\00
-\00\00\00FK CONSTRAINT\00\00\00\00\00~\00\00\00ALTER TABLE ONLY public.devamsizlik
-    ADD CONSTRAINT devamsizlik_fk FOREIGN KEY (ogr_id) REFERENCES public.ogrenci(ogr_id);
-\00D\00\00\00ALTER TABLE ONLY public.devamsizlik DROP CONSTRAINT devamsizlik_fk;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00199\00\00\00\00196\00\00\00\002806\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016488\00\00\00\00devamsizlik devamsizlik_fk_1\00
-\00\00\00FK CONSTRAINT\00\00\00\00\00\00\00\00ALTER TABLE ONLY public.devamsizlik
-    ADD CONSTRAINT devamsizlik_fk_1 FOREIGN KEY (ders_id) REFERENCES public.ders(ders_id);
-\00F\00\00\00ALTER TABLE ONLY public.devamsizlik DROP CONSTRAINT devamsizlik_fk_1;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\00197\00\00\00\00199\00\00\00\002812\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016501\00\00\00\00tweet tweet_fk\00
-\00\00\00FK CONSTRAINT\00\00\00\00\00r\00\00\00ALTER TABLE ONLY public.tweet
-    ADD CONSTRAINT tweet_fk FOREIGN KEY (ogr_id) REFERENCES public.ogrenci(ogr_id);
-\008\00\00\00ALTER TABLE ONLY public.tweet DROP CONSTRAINT tweet_fk;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\002806\00\00\00\00200\00\00\00\00196\00\00\00\00\00\00\00\00\00\00\00\00
-\00\00\00\00\00\00\00\00\00\00\002606\00\00\00\0016506\00\00\00\00tweet tweet_fk_1\00
-\00\00\00FK CONSTRAINT\00\00\00\00\00s\00\00\00ALTER TABLE ONLY public.tweet
-    ADD CONSTRAINT tweet_fk_1 FOREIGN KEY (ders_id) REFERENCES public.ders(ders_id);
-\00:\00\00\00ALTER TABLE ONLY public.tweet DROP CONSTRAINT tweet_fk_1;
-\00\00\00\00\00\00\00public\00\00\00\00\00\00\00postgres\00\00\00\00false\00\00\00\002812\00\00\00\00200\00\00\00\00197\00\00\00\00\00\00\00\00\00\00\00\00\88\00\00\00
-\00\00\00x\9C\8B\D1\E3\E2\E2\00\C5\00\A9\00\00\00\00\00\00\8A\00\00\00
-\00\00\00x\9C\8B\D1\E3\E2\E2\00\C5\00\A9\00\00\00\00\00\00\89\00\00\00
-\00\00\00x\9C\8B\D1\E3\E2\E2\00\C5\00\A9\00\00\00\00\00\00\87\00\00\00
-\00\00\00x\9C\8B\D1\E3\E2\E2\00\C5\00\A9\00\00\00\00\00\00\8B\00\00\00
-\00\00\00x\9C\8B\D1\E3\E2\E2\00\C5\00\A9\00\00\00\00\00
