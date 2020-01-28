@@ -10,7 +10,7 @@ import {
 import { DenemeService } from "./deneme.service";
 import { Response } from "express";
 import { ResultPackage } from "src/common/result-package";
-import { deneme } from "../../../../models/deneme";
+import { deneme } from "src/models/models";
 
 @Controller("api/deneme")
 export class DenemeController {
@@ -28,13 +28,12 @@ export class DenemeController {
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed())
       );
   }
-  @Get()
+  @Get("deneme-inset")
   getTweet(@Res() res: Response) {
     this.service
-      .tt()
+      .dd()
       .then(data => {
         res.status(HttpStatus.OK).json(ResultPackage.success(data));
-        console.log(data);
       })
       .catch(() =>
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed())

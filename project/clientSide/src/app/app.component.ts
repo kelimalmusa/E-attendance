@@ -13,9 +13,9 @@ export class AppComponent {
   constructor(private http: HttpClient) {
     this.deneme = new deneme();
   }
-  save() {
-    this.deneme.name = "CAFER";
-    this.deneme.age = 255;
+  save(name: string, numbere: number) {
+    this.deneme.name = name;
+    this.deneme.age = numbere;
     this.http
       .post("http://localhost:3001/api/deneme", this.deneme)
       .subscribe(asd => {

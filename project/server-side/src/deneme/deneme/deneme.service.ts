@@ -1,10 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
-import { deneme } from "../../../../models/deneme";
+import { deneme } from "src/models/models";
 
 import * as twit from "twit";
-import { promises } from "dns";
-import { rejects } from "assert";
 
 export const Twitter = new twit({
   consumer_key: "QrSELxABo1TSwl0Bpr6DV9VK4",
@@ -28,10 +26,8 @@ export class DenemeService {
           deneme.age
         ])
         .then(result => {
-          if (!result.rowCount) {
-            return reject();
-          }
-          console.dir(result);
+          if (!result.rowCount) return reject();
+          console.dir(result.rowCount);
           resolve();
         })
         .catch(e => {
