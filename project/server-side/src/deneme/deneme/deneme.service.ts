@@ -45,7 +45,8 @@ export class DenemeService {
         result_type: "mixed"
       })
         .then(function(result: any) {
-          console.log(result.data.statuses.length);
+          console.log("data");
+          console.log(result.data);
           resolve(result.data.statuses);
         })
         .catch(e => {

@@ -1,6 +1,5 @@
 import { Injectable, Controller } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
-// import { Ogrenci } from "../../../../models/ogrenci";
 type Ogrenci = any;
 @Injectable()
 export class OgrenciService {
@@ -10,7 +9,7 @@ export class OgrenciService {
       this.dbs
         .getPool()
         .query(
-          "insert into ogrenci (ogr_no,ogr_name,ogr_username,ogr_ogrenim_turu,ogr_user_id,ogr_username)values($1,$2,$3,$4,$5,$6)",
+          "insert into ogrenci (ogr_no,ogr_name,ogr_surname,ogr_ogrenim_turu,ogr_user_id,ogr_username)values($1,$2,$3,$4,$5,$6)",
           [
             newOgrenci.ogr_no,
             newOgrenci.ogr_name,

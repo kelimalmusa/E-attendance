@@ -4,12 +4,15 @@ import {
   Res,
   HttpStatus,
   Param,
-  Delete
+  Delete,
+  Post,
+  Body
 } from "@nestjs/common";
 import { OgrenciService } from "./ogrenci.service";
 import { Response } from "express";
 import { ResultPackage } from "src/common/result-package";
 import * as lodash from "lodash";
+import { Ogrenci } from "src/models/models";
 @Controller("ogrenci")
 export class OgrenciController {
   constructor(private ogrs: OgrenciService) {}
@@ -19,6 +22,17 @@ export class OgrenciController {
       .findAll()
       .then(data => {
         res.status(HttpStatus.OK).json(ResultPackage.success(data));
+      })
+      .catch(() =>
+        res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed())
+      );
+  }
+  @Post()
+  insertOgrenci(@Body() body: Ogrenci, @Res() res: Response) {
+    this.ogrs
+      .insertStudent(body)
+      .then(() => {
+        res.status(HttpStatus.OK).json(ResultPackage.success());
       })
       .catch(() =>
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed())
