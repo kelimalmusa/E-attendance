@@ -26,7 +26,7 @@ export class DersService {
         )
         .then(result => {
           if (!result || !result.rowCount) return reject();
-          console.dir();
+          console.dir(result);
           return resolve();
         })
         .catch(e => {

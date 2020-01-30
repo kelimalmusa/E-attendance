@@ -15,7 +15,7 @@ import { Tweet } from "src/models/tweet";
 @Controller("tweet")
 export class TweetController {
   constructor(private twes: TweetService) {}
-  @Get("hashtag/:hashtag")
+  @Get(":hashtag")
   getTweets(@Res() res: Response, @Param("hashtag") hastag: string) {
     this.twes
       .collectTweets(hastag)

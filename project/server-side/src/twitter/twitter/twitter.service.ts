@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import * as twit from "twit";
+import { QueryResult } from "pg";
 export const Twitter = new twit({
   consumer_key: "QrSELxABo1TSwl0Bpr6DV9VK4",
   consumer_secret: "yFsBhyYfVhenZwjLw5Okl2PdTWGjUH8czLGlCfnYabVlwLr8fp",
@@ -12,7 +13,7 @@ export const Twitter = new twit({
 export class TwitterService {
   constructor() {}
 
-  findTweetByHashtag(hashtag: string) {
+  findTweetByHashtag(hashtag: string): Promise<any> {
     return new Promise((resolve, reject) => {
       Twitter.get("search/tweets", {
         q: "#" + hashtag,
