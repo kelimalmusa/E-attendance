@@ -2,7 +2,7 @@
 
 # SENARYO
 
-1- İlk başta super user olan kullanıcı bölümdü olan ve açılması mümkün olan dersleri ders tablosuna ekler.
+1- İlk başta super user olan kullanıcı bölümdü olan ve açılması mümkün olan dersleri ders tablosuna ekler.\n
 2- Dönemin başlangıcında öğrenciler gelmeden önce hocaların hesapları super user tarafından açılır ve şifre belirlenir.
 3- Her hoca kendi kullanıcı adı ve şifresiyle giriş yaparak vereceği dersiseçerk altına bazı bilgileri (ders haftalık saati, dersin işleneceği gün, saat, salon, dersin uygulama dersi olup olmadığı) ekler ve açılan dersler tablosuna ekler.
 4- Dönemin ilk haftasında öğrenciler tek seferliğine mahsus sign up yapıp (öğrenci numarası, email adresi, twitter kullanıcı adı, aldığı dersler) girmesi ve kendine şifre belirlemesi gerekiyor.
