@@ -1,4 +1,5 @@
-<h1> BitirmeProjesi </h1>
+<h1 align="center"> Muhteşem şeyler olacak </h1>
+<h2> BitirmeProjesi </h2>
 
 <h3> SENARYO </h3>
 <p>
