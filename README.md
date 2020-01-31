@@ -1,4 +1,4 @@
-# BitirmeProjesi
+<h1> BitirmeProjesi </h1>
 
 # SENARYO
 
