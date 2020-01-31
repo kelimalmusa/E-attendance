@@ -1,7 +1,7 @@
 <h1> BitirmeProjesi </h1>
 
-# SENARYO
-
+<h3> SENARYO <h3>
+<p>
 1- İlk başta super user olan kullanıcı bölümdü olan ve açılması mümkün olan dersleri ders tablosuna ekler.</br>
 2- Dönemin başlangıcında öğrenciler gelmeden önce hocaların hesapları super user tarafından açılır ve şifre belirlenir. </br>
 3- Her hoca kendi kullanıcı adı ve şifresiyle giriş yaparak vereceği dersiseçerk altına bazı bilgileri (ders haftalık saati, dersin işleneceği gün, saat, salon, dersin uygulama dersi olup olmadığı) ekler ve açılan dersler tablosuna ekler. </br>
@@ -10,7 +10,7 @@
 6- Sistem otomatik olarak haftada bir veya iki kere yapılan tweetler kontrol ederek açılan hashtagları çekecek. </br>
 7- Çekilen hashtagları belli bir işlemden geçirerek lokasyon doğrulaması ve öğrenci ve ders araması yaparak veri tabanına kaydedecektir. </br>
 8- Kaydedilen verileri işleme alarak hangi öğrenci hangi derse katıldığı, hangi derse hangi öğrenciler katıldıığı ve hangi öğrenci hangi dersten devamsılıktan kaldığını öğrenerek sistem liste oluştuuracak ve ilgili hocaya sunacaktır.
-
+</p>
 # Problemler
 
 1- Resim çekip konum eklemeye çalışıldığında eğer google mapst'te konum doğru değilse twitter doğru konum getiremiyor; google map'i açıp konumu güncelleyince twitter doğru konumu çekiyor ve artık tweet atabiliyoruz (doğru konumdan);
