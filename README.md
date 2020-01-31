@@ -1,5 +1,6 @@
 # BitirmeProjesi
 
+# SENARYO
 
 
 # Problemler
