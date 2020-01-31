@@ -9,7 +9,8 @@
 5- Her hafta da ders başladığında "İÜ_BMG_335_NÖ_A_T" (burada İÜ = inönü üniversitesi, BMG = bilisayar mühendisliğine giriş, 335 = dersKodu, NÖ= normal öğretim, A= A şubesi ve T = ders teorik olduğunu ifade ediyor) şeklinde benzer hashtag açarak tweet yapacak. </br></br>
 6- Sistem otomatik olarak haftada bir veya iki kere yapılan tweetler kontrol ederek açılan hashtagları çekecek. </br></br>
 7- Çekilen hashtagları belli bir işlemden geçirerek lokasyon doğrulaması ve öğrenci ve ders araması yaparak veri tabanına kaydedecektir. </br></br>
-8- Kaydedilen verileri işleme alarak hangi öğrenci hangi derse katıldığı, hangi derse hangi öğrenciler katıldıığı ve hangi öğrenci hangi dersten devamsılıktan kaldığını öğrenerek sistem liste oluştuuracak ve ilgili hocaya sunacaktır.
+8- Kaydedilen verileri işleme alarak hangi öğrenci hangi derse katıldığı, hangi derse hangi öğrenciler katıldıığı ve hangi öğrenci hangi dersten devamsılıktan kaldığını öğrenerek sistem liste oluştuuracak ve ilgili hocaya sunacaktır.</br></br>
+9- Öğrencinin istediği zaman giriş yaparak her derste kullandığı devamsızlık hakkını ve varsa devamsızlıktan kaldığı dersi görebilecektir </br></br>
 </p>
 </br>
 <hr>
