@@ -8,5 +8,5 @@ export class Ogrenci extends User {
   ogr_surname!: string;
   ogr_user_id!: string;
   ogr_ogrenim_turu!: string;
-  ders!: number[]; // ileri zamanda bunu Ders[] e çevirmek gerekebilir
+  ders!: Ders[]; // ileri zamanda bunu Ders[] e çevirmek gerekebilir
 }

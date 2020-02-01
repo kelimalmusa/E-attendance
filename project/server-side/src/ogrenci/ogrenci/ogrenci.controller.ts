@@ -89,4 +89,19 @@ export class OgrenciController {
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed())
       );
   }
+  @Post("update/:ogrNo")
+  updateOgrenciByOgrNo(
+    @Res() res: Response,
+    @Param("ogrNo") ogrNo: number,
+    @Body() ogr: Ogrenci
+  ) {
+    this.ogrs
+      .updateOgrenci(ogrNo, ogr)
+      .then(() => {
+        res.status(HttpStatus.OK).json(ResultPackage.success());
+      })
+      .catch(() => {
+        res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());
+      });
+  }
 }
