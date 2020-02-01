@@ -12,8 +12,15 @@ export class HocaService {
       this.dbs
         .getPool()
         .query(
-          "insert into hoca (hoca_name,hoca_surname,hoca_title) values ($1,$2,$3)",
-          [newHoca.hoca_name, newHoca.hoca_surname, newHoca.hoca_title]
+          "insert into hoca (hoca_name,hoca_surname,hoca_title,hoca_username,hoca_email,hoca_password) values ($1,$2,$3,$4,$5,$6)",
+          [
+            newHoca.hoca_name,
+            newHoca.hoca_surname,
+            newHoca.hoca_title,
+            newHoca.username,
+            newHoca.email,
+            newHoca.password
+          ]
         )
         .then(result => {
           if (!result || !result.rowCount) return reject();
