@@ -21,10 +21,10 @@ export class TweetController {
       .collectTweets(hastag)
       .then(data => {
         res.status(HttpStatus.OK).json(ResultPackage.success(data));
-        data.forEach(element => {
-          this.twes.saveTweets(element);
-          // console.log(element);
-        });
+        // data.forEach(element => {
+        //   this.twes.saveTweets(element);
+        //   // console.log(element);
+        // });
       })
       .catch(() => {
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());

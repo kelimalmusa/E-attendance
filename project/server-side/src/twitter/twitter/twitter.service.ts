@@ -19,7 +19,7 @@ export class TwitterService {
         q: "#" + hashtag,
         count: 100,
         result_type: "mixed"
-        // until: "2020-01-28"
+        // until: "2020-01-31"
       })
         .then(function(result: any) {
           //   console.log(result.data.statuses);

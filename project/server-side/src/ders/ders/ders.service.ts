@@ -6,7 +6,10 @@ import { QueryResult } from "pg";
 
 @Injectable()
 export class DersService {
-  constructor(private dbs: DatabaseService) {}
+  dersList: Ders[];
+  constructor(private dbs: DatabaseService) {
+    this.dersList = new Array<Ders>();
+  }
   insertNewDers(newDers: Ders): Promise<Ders> {
     return new Promise((resolve, reject) => {
       this.dbs
@@ -35,18 +38,37 @@ export class DersService {
         });
     });
   }
-  findAll(): Promise<QueryResult> {
+  findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.dbs
         .getPool()
         .query("select * from ders")
         .then(result => {
           if (!result || !result.rowCount) {
-            console.log("Hata Service İf te");
             return reject();
           }
-          console.dir(result);
-          resolve(result);
+          this.dersList = result.rows;
+          console.log("Şuan burdayız Kanka", this.dersList);
+          resolve(this.dersList);
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
+  findDersByDersCodeOrName(param: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.dbs
+        .getPool()
+        .query(
+          "select * from ders where ders_code ilike $1 or ders_name ilike $1",
+          ["%" + param + "%"]
+        )
+        .then(result => {
+          if (!result) return reject();
+          console.log(result.rows);
+          return resolve(result.rows);
         })
         .catch(e => {
           console.error(e);

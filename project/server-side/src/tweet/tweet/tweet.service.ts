@@ -17,6 +17,7 @@ export class TweetService {
         .findTweetByHashtag(hastag)
         .then(result => {
           if (!result) return reject();
+          this.controlLocation(result);
           //   console.dir(result);
           return resolve(result);
         })
@@ -24,6 +25,36 @@ export class TweetService {
           console.error(e);
           reject();
         });
+    });
+  }
+  controlLocation(data: any[]) {
+    let boylam = 0,
+      enlem = 0,
+      length = 0;
+    data.forEach(element => {
+      if (
+        (element.geo && element.user.name == "Kelim Almusa") ||
+        element.user.name === "Muhammed Miraç Kurt"
+      ) {
+        boylam += element.geo.coordinates[0];
+        enlem += element.geo.coordinates[1];
+        length++;
+      }
+    });
+    console.log("Length", length);
+    console.log("BOYLAM", (boylam /= length));
+    console.log("enlem", (enlem /= length));
+    data.forEach(element => {
+      if (element.geo) {
+        if (
+          (element.geo.coordinates[0] <= boylam + 0.0001 &&
+            element.geo.coordinates[0] >= boylam - 0.0001) ||
+          (element.geo.coordinates[1] <= enlem + 0.0001 &&
+            element.geo.coordinates[1] >= enlem - 0.0001)
+        )
+          console.log("Dahil", element.user.name);
+        else console.log("HAriç", element.user.name);
+      }
     });
   }
   saveTweets(newTweet): Promise<QueryResult> {

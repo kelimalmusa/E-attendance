@@ -27,6 +27,17 @@ export class DersController {
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());
       });
   }
+  @Get(":dersCode")
+  getDersByCode(@Res() res: Response, @Param("dersCode") param: string) {
+    this.deS
+      .findDersByDersCodeOrName(param)
+      .then(result => {
+        res.status(HttpStatus.OK).json(ResultPackage.success(result));
+      })
+      .catch(() => {
+        res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());
+      });
+  }
   @Get()
   findAllDers(@Res() res: Response) {
     this.deS
