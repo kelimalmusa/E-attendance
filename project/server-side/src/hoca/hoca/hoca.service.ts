@@ -1,9 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { Hoca } from "src/models/hoca";
-import { QueryResult } from "pg";
-import { resolve } from "dns";
-
+import * as lodash from "lodash";
 @Injectable()
 export class HocaService {
   constructor(private dbs: DatabaseService) {}
@@ -33,7 +31,24 @@ export class HocaService {
         });
     });
   }
-  findAll(): Promise<QueryResult> {
+  getHocaById(hocaIdList: number[]): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const dollars = hocaIdList.map((_, index) => "$" + (index + 1));
+      this.dbs
+        .getPool()
+        .query(`select * from hoca where hoca_id in (${dollars})`, hocaIdList)
+        .then(result => {
+          if (!result) return reject();
+          console.log(result.rows);
+          resolve(result);
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
+  findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.dbs
         .getPool()

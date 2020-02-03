@@ -15,9 +15,9 @@ export class DevamsizlikController {
     this.devSer
       .getAttendance(hashtag)
       .then(result => {
-        result.forEach(element => {
-          if (element.geo) this.devSer.saveToDevmasizlikTalbe(element);
-        });
+        // result.forEach(element => {
+        //   // if (element.geo) this.devSer.saveToDevmasizlikTalbe(element);
+        // });
         res.status(HttpStatus.OK).json(ResultPackage.success(result));
       })
       .catch(() => {

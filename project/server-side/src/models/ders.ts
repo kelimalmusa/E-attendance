@@ -8,4 +8,6 @@ export class Ders {
   ders_baslangic_saat!: string;
   ders_hoca_id!: number;
   ders_salon!: string;
+  // fetch only
+  ders_hoca!: Ders;
 }

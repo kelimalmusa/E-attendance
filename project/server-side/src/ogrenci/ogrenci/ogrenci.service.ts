@@ -1,12 +1,12 @@
+import * as lodash from "lodash";
 import { Injectable, Controller } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { Ogrenci, Ders } from "src/models/models";
-import { resolve } from "dns";
-import { async } from "rxjs/internal/scheduler/async";
+import { DersService } from "src/ders/ders/ders.service";
 @Injectable()
 export class OgrenciService {
   tmp: Ogrenci = new Ogrenci();
-  constructor(private dbs: DatabaseService) {
+  constructor(private dbs: DatabaseService, private dersSer: DersService) {
     this.tmp.ders = new Array<Ders>();
   }
   insertStudent(newOgrenci: Ogrenci): Promise<any> {
@@ -64,24 +64,6 @@ export class OgrenciService {
     });
   }
   // bu fonksiyonu ders service e taşımak daha mantıklı olanilir
-  getDersByOgrencId(ogrenciId: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.dbs
-        .getPool()
-        .query(
-          "select * from ders inner join ogrenci_kayit on ogrenci_kayit.ogr_id =$1 and ogrenci_kayit.ders_id=ders.ders_id",
-          [ogrenciId]
-        )
-        .then(result => {
-          if (!result || !result.rowCount) return reject();
-          return resolve(result.rows);
-        })
-        .catch(e => {
-          console.error(e);
-          reject();
-        });
-    });
-  }
 
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -90,9 +72,29 @@ export class OgrenciService {
         .query("select * from ogrenci")
         .then(result => {
           if (!result) return reject(); //TODO veritabanından gelen result nesnesini Ogrenci veya ilgili nesneye atamamız gerek
-          let tmp: Ogrenci = new Ogrenci();
-          tmp = result.rows[0];
-          console.log("tmp", tmp);
+          const ogrenciList = result.rows.map(i => i.ogr_id);
+          this.dersSer.getDersByOgrencId(ogrenciList).then(dersReq => {
+            const dersList = lodash.groupBy(dersReq.rows, "ogr_id");
+            result.rows.forEach(element => {
+              element.ders = dersList[element.ogr_id];
+            });
+            return resolve(result.rows);
+          });
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
+  findOgrenciByOgrId(id: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.dbs // bura yeni yapıldı dikkatli oku ve tüm fonksiyonları buna göre yap
+        .getPool()
+        .query("select * from ogrenci where ogr_id =$1", [id])
+        .then(result => {
+          if (!result) return reject();
+          console.dir(result);
           return resolve(result);
         })
         .catch(e => {
@@ -109,7 +111,7 @@ export class OgrenciService {
         .then(async result => {
           // async e dikkat!!!!!!!!
           if (!result) return reject();
-          await this.getDersByOgrencId(id).then(res => {
+          await this.dersSer.getDersByOgrencId([id]).then(res => {
             this.tmp = result.rows[0];
             this.tmp.ders = res;
           });
@@ -122,6 +124,7 @@ export class OgrenciService {
         });
     });
   }
+
   findOgrenciByOgrNo(ogrNo: number): Promise<any> {
     return new Promise((resolve, reject) => {
       this.dbs
@@ -129,10 +132,12 @@ export class OgrenciService {
         .query("select * from ogrenci where ogr_no =$1", [ogrNo])
         .then(async result => {
           if (!result) return reject();
-          await this.getDersByOgrencId(result.rows[0].ogr_id).then(res => {
-            this.tmp = result.rows[0];
-            this.tmp.ders = res;
-          });
+          await this.dersSer
+            .getDersByOgrencId([result.rows[0].ogr_id])
+            .then(res => {
+              this.tmp = result.rows[0];
+              this.tmp.ders = res;
+            });
           console.dir(result.rows);
           return resolve(result.rows);
         })

@@ -17,7 +17,7 @@ export class TweetService {
         .findTweetByHashtag(hastag)
         .then(result => {
           if (!result) return reject();
-          this.controlLocation(result);
+          // this.controlLocation(result);
           //   console.dir(result);
           return resolve(result);
         })
@@ -27,7 +27,7 @@ export class TweetService {
         });
     });
   }
-  controlLocation(data: any[]) {
+  getAverage(data: any[]): number[] {
     let boylam = 0,
       enlem = 0,
       length = 0;
@@ -41,20 +41,54 @@ export class TweetService {
         length++;
       }
     });
+    boylam /= length;
+    enlem /= length;
     console.log("Length", length);
-    console.log("BOYLAM", (boylam /= length));
-    console.log("enlem", (enlem /= length));
-    data.forEach(element => {
-      if (element.geo) {
-        if (
-          (element.geo.coordinates[0] <= boylam + 0.0001 &&
-            element.geo.coordinates[0] >= boylam - 0.0001) ||
-          (element.geo.coordinates[1] <= enlem + 0.0001 &&
-            element.geo.coordinates[1] >= enlem - 0.0001)
-        )
-          console.log("Dahil", element.user.name);
-        else console.log("HAriç", element.user.name);
+    console.log("BOYLAM", boylam);
+    console.log("enlem", enlem);
+    return [boylam, enlem];
+  }
+  controlLocation(data, average: number[]): boolean {
+    if (data.geo) {
+      if (
+        (data.geo.coordinates[0] <= average[0] + 0.0001 &&
+          data.geo.coordinates[0] >= average[0] - 0.0001) ||
+        (data.geo.coordinates[1] <= average[1] + 0.0001 &&
+          data.geo.coordinates[1] >= average[1] - 0.0001)
+      ) {
+        console.log("Dahil", data.user.name);
+        return true;
+      } else {
+        console.log("HAriç", data.user.name);
+        return false;
       }
+    }
+    return false;
+  }
+  saveToDevmasizlikTalbe(tweet: any, gecerlilik): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.dbs
+        .getPool()
+        .query(
+          "insert into devamsizlik (ogr_id,tweet_id,islem_location,islem_tarih,ders_id,islem_gecerlilik) values ($1,$2,$3,$4,$5,$6)",
+          [
+            tweet.user.id_str,
+            tweet.id_str,
+            tweet.geo.coordinates,
+            tweet.created_at,
+            this.dersId,
+            gecerlilik
+          ]
+        )
+        .then(result => {
+          if (!result) return reject();
+          console.log("saveTodatabse", result);
+          resolve();
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
     });
   }
   saveTweets(newTweet): Promise<QueryResult> {
@@ -85,7 +119,7 @@ export class TweetService {
           if (!result) return reject();
           this.dersId = result.rows[0].ders_id;
           console.log("result", this.dersId);
-          // resolve();
+          resolve();
         })
         .catch(e => {
           console.error(e);
