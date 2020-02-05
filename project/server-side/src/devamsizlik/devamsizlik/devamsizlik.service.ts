@@ -64,6 +64,39 @@ export class DevamsizlikService {
         });
     });
   }
+  getAttendanceByDers(dersId: number): Promise<any> {
+    // ders tarih de eklemek gerek
+    return new Promise((resolve, reject) => {
+      let ogrenciIdList: number[];
+      let tweetIdList: number[];
+      this.tweetSer
+        .getTweetFromDBByDersId(dersId)
+        .then(result2 => {
+          if (!result2) return reject();
+          resolve(result2);
+          tweetIdList = result2.map(tweetid => tweetid.tweet.id);
+          console.log("tweetIdList", tweetIdList);
+          ogrenciIdList = result2.map(ogrId => ogrId.tweet.user.id);
+          console.log("ogrenciIdList", ogrenciIdList);
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+      resolve();
+    });
+  }
+  savetoDevamsizlikTable(
+    tweetIdList: number[],
+    ogrenciIdList: number[],
+    dersId: number
+  ) {
+    this.dbs
+      .getPool()
+      .query(
+        `insert into devamsizlik (ogr_id,ders_id,tweet_id,islem_location,islem_tarih) values `
+      );
+  }
 }
 //gerekli
 //

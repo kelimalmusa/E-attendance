@@ -24,6 +24,17 @@ export class DevamsizlikController {
         res.status(HttpStatus.OK).json(ResultPackage.failed());
       });
   }
+  @Get("ders/:ders")
+  getAttendanceByDers(@Res() res: Response, @Param("ders") dersId: number) {
+    this.devSer
+      .getAttendanceByDers(dersId)
+      .then(result => {
+        res.status(HttpStatus.OK).json(ResultPackage.success(result));
+      })
+      .catch(() => {
+        res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());
+      });
+  }
 
   // @Get(":hashtag")
   // getAttendance(@Res() res: Response, @Param("hashtag") id: number) {

@@ -48,7 +48,7 @@ export class TweetController {
   @Get("fromdb/ogrenci/:id")
   getTweetsFromDbByOgrId(@Res() res: Response, @Param("id") ogrId: number) {
     this.twes
-      .getTweetFromDBByOgrId(ogrId)
+      .getTweetFromDBByOgrId([ogrId])
       .then(result => {
         res.status(HttpStatus.OK).json(ResultPackage.success(result));
       })

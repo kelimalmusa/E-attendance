@@ -97,13 +97,11 @@ export class OgrenciService {
         .getPool()
         .query(`select * from ogrenci where ogr_id in (${dollars})`, ogrIdList)
         .then(result => {
-          console.log("result----", result);
           if (!result) return reject();
           // const ogrenciIdList = result.rows.map(i => i.ogr_id);
           this.dersSer
             .getDersByOgrencId(ogrIdList)
             .then(dersReq => {
-              console.log("--------------------------", dersReq);
               if (dersReq.rowCount) {
                 const dersList = lodash.groupBy(dersReq.rows, "ogr_id");
                 result.rows.forEach(element => {
@@ -212,7 +210,7 @@ export class OgrenciService {
           dersIdList
         )
         .then(result => {
-          if (!result || !result.rowCount) return reject();
+          if (!result) return reject();
           return resolve(result.rows);
         })
         .catch(e => {

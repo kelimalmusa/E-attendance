@@ -106,40 +106,46 @@ export class TweetService {
         });
     });
   }
-  getTweetFromDBByOgrId(ogrId: number): Promise<any> {
+  getTweetFromDBByOgrId(ogrId: number[]): Promise<any> {
     return new Promise((resolve, reject) => {
+      const dollars = ogrId.map((_, index) => "$" + (index + 1));
       this.dbs
         .getPool()
-        .query("select * from tweet where ogr_id=$1", [ogrId])
+        .query(`select * from tweet where ogr_id in (${dollars})`, ogrId)
         .then(result => {
           if (!result) return reject();
-          //gelen tweete tweeti yapan öğrenciyi ekleme
-          this.ogrSer
-            .findOgrenciByOgrId([ogrId])
-            .then(res => {
-              result.rows.map(e => (e.ogrenci = res[0]));
-              // resolve(result.rows);
-            })
-            .catch(e => {
-              console.error(e);
-              reject();
-            });
+          if (result.rows.length) {
+            //gelen tweete tweeti yapan öğrenciyi ekleme
+            this.ogrSer
+              .findOgrenciByOgrId(ogrId)
+              .then(res => {
+                result.rows.map(e => (e.ogrenci = res[0]));
+                resolve(result.rows);
+              })
+              .catch(e => {
+                console.error(e);
+                reject();
+              });
+          }
+          resolve(result.rows);
           // end of gelen tweete tweeti yapan öğrenciyi ekleme
 
           // gelen tweete ilgili dersi ekleme
           const dersIdList = result.rows.map(e => e.ders_id);
-          console.log("dersIdList", dersIdList);
-          this.derSer
-            .getDersById(dersIdList)
-            .then(req => {
-              result.rows.map(e => (e.ders = req[0]));
-              return resolve(result.rows);
-              // end of gelen tweete ilgili dersi ekleme
-            })
-            .catch(e => {
-              console.error(e);
-              reject();
-            });
+          if (dersIdList.length) {
+            this.derSer
+              .getDersById(dersIdList)
+              .then(req => {
+                result.rows.map(e => (e.ders = req[0]));
+                return resolve(result.rows);
+                // end of gelen tweete ilgili dersi ekleme
+              })
+              .catch(e => {
+                console.error(e);
+                reject();
+              });
+          }
+          resolve(result.rows);
         })
         .catch(e => {
           console.error(e);
@@ -151,7 +157,7 @@ export class TweetService {
     return new Promise((resolve, reject) => {
       this.dbs
         .getPool()
-        .query("select * from tweet where ders_id=$1", [dersId])
+        .query("select * from tweet where ders_id=$1", [dersId]) // buraya sorguya (and tarih=$2 eklememiz lazım çünkü belli bir dersin belli tarihta yoklamasını alıyoruz)
         .then(result => {
           if (!result) return reject();
           //gelen tweete tweeti yapan öğrenciyi ekleme

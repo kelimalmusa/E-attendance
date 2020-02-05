@@ -154,18 +154,20 @@ export class DersService {
   }
   getDersById(dersId: number[]): Promise<any> {
     return new Promise((resolve, reject) => {
-      const dollars = dersId.map((_, index) => "$" + (index + 1));
-      this.dbs
-        .getPool()
-        .query(`select * from ders where ders_id in (${dollars})`, dersId)
-        .then(result => {
-          if (!result) return reject();
-          resolve(result.rows);
-        })
-        .catch(e => {
-          console.error(e);
-          reject();
-        });
+      if (dersId.length) {
+        const dollars = dersId.map((_, index) => "$" + (index + 1));
+        this.dbs
+          .getPool()
+          .query(`select * from ders where ders_id in (${dollars})`, dersId)
+          .then(result => {
+            if (!result) return reject();
+            resolve(result.rows);
+          })
+          .catch(e => {
+            console.error(e);
+            reject();
+          });
+      }
     });
   }
   getDersIdByOgrenciId(ogrenciId: number[]) {
