@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { deneme } from "./deneme/deneme";
+import { Deneme } from "./deneme/deneme";
 import { HttpHeaders, HttpParams, HttpClient } from "@angular/common/http";
 
 @Component({
@@ -9,17 +9,17 @@ import { HttpHeaders, HttpParams, HttpClient } from "@angular/common/http";
 })
 export class AppComponent {
   title = "clientSide";
-  deneme: deneme;
+  deneme: Deneme;
   constructor(private http: HttpClient) {
-    this.deneme = new deneme();
+    this.deneme = new Deneme();
   }
   save(name: string, numbere: number) {
     this.deneme.name = name;
     this.deneme.age = numbere;
     this.http
-      .post("http://localhost:3001/api/deneme", this.deneme)
+      .get("http://localhost:3001/tweet/" + this.deneme.name)
       .subscribe(asd => {
-        console.log("sonuc,", new Date());
+        console.log("sonuc,", asd);
       });
   }
 }

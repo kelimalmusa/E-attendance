@@ -2,24 +2,40 @@ import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { QueryResult } from "pg";
 import { TwitterService } from "src/twitter/twitter/twitter.service";
+import { DersService } from "src/ders/ders/ders.service";
+import { OgrenciService } from "src/ogrenci/ogrenci/ogrenci.service";
 
 @Injectable()
 export class TweetService {
   dersId: number;
   constructor(
     private dbs: DatabaseService,
-    private twitterService: TwitterService
+    private twitterService: TwitterService,
+    private derSer: DersService,
+    private ogrSer: OgrenciService
   ) {}
   collectTweets(hastag: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.getDersId(hastag);
+      this.derSer.findDersByDersCodeOrName(hastag).then(result => {
+        // console.log("dersasdasdasdsa", result);
+        this.dersId = result[0].ders_id;
+      });
       this.twitterService
         .findTweetByHashtag(hastag)
-        .then(result => {
-          if (!result) return reject();
-          // this.controlLocation(result);
-          //   console.dir(result);
-          return resolve(result);
+        .then(result2 => {
+          if (!result2) return reject();
+          let average = this.getAverage(result2);
+          result2.forEach(element => {
+            this.saveToDevmasizlikTalbe(
+              element,
+              this.controlLocation(element, average)
+            );
+          });
+          result2.forEach(element => {
+            this.saveTweets(element);
+            // this.controlLocation(element, average);
+          });
+          return resolve(result2);
         })
         .catch(e => {
           console.error(e);
@@ -74,7 +90,7 @@ export class TweetService {
           [
             tweet.user.id_str,
             tweet.id_str,
-            tweet.geo.coordinates,
+            tweet.geo ? tweet.geo.coordinates : null,
             tweet.created_at,
             this.dersId,
             gecerlilik
@@ -82,8 +98,90 @@ export class TweetService {
         )
         .then(result => {
           if (!result) return reject();
-          console.log("saveTodatabse", result);
           resolve();
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
+  getTweetFromDBByOgrId(ogrId: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.dbs
+        .getPool()
+        .query("select * from tweet where ogr_id=$1", [ogrId])
+        .then(result => {
+          if (!result) return reject();
+          //gelen tweete tweeti yapan öğrenciyi ekleme
+          this.ogrSer
+            .findOgrenciByOgrId([ogrId])
+            .then(res => {
+              result.rows.map(e => (e.ogrenci = res[0]));
+              // resolve(result.rows);
+            })
+            .catch(e => {
+              console.error(e);
+              reject();
+            });
+          // end of gelen tweete tweeti yapan öğrenciyi ekleme
+
+          // gelen tweete ilgili dersi ekleme
+          const dersIdList = result.rows.map(e => e.ders_id);
+          console.log("dersIdList", dersIdList);
+          this.derSer
+            .getDersById(dersIdList)
+            .then(req => {
+              result.rows.map(e => (e.ders = req[0]));
+              return resolve(result.rows);
+              // end of gelen tweete ilgili dersi ekleme
+            })
+            .catch(e => {
+              console.error(e);
+              reject();
+            });
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
+  getTweetFromDBByDersId(dersId: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.dbs
+        .getPool()
+        .query("select * from tweet where ders_id=$1", [dersId])
+        .then(result => {
+          if (!result) return reject();
+          //gelen tweete tweeti yapan öğrenciyi ekleme
+          const ogrIdList = result.rows.map(i => i.ogr_id);
+          this.ogrSer
+            .findOgrenciByOgrId(ogrIdList)
+            .then(res => {
+              result.rows.map(e => (e.ogrenci = res[0]));
+              // resolve(result.rows);
+            })
+            .catch(e => {
+              console.error(e);
+              reject();
+            });
+          // end of gelen tweete tweeti yapan öğrenciyi ekleme
+
+          // gelen tweete ilgili dersi ekleme
+          const dersIdList = result.rows.map(e => e.ders_id);
+          // console.log("dersIdList", dersIdList);
+          this.derSer
+            .getDersById(dersIdList)
+            .then(req => {
+              result.rows.map(e => (e.ders = req[0]));
+              return resolve(result.rows);
+              // end of gelen tweete ilgili dersi ekleme
+            })
+            .catch(e => {
+              console.error(e);
+              reject();
+            });
         })
         .catch(e => {
           console.error(e);
@@ -101,25 +199,7 @@ export class TweetService {
         )
         .then(result => {
           if (!result || !result.rowCount) return reject();
-          this.getDersId(newTweet.entities.hashtags[0].text);
           return resolve();
-        })
-        .catch(e => {
-          console.error(e);
-          reject();
-        });
-    });
-  }
-  getDersId(hashtag: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.dbs
-        .getPool()
-        .query("select ders_id from ders where ders_code =$1", [hashtag])
-        .then(result => {
-          if (!result) return reject();
-          this.dersId = result.rows[0].ders_id;
-          console.log("result", this.dersId);
-          resolve();
         })
         .catch(e => {
           console.error(e);

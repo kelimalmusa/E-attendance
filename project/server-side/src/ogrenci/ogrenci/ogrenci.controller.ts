@@ -40,15 +40,15 @@ export class OgrenciController {
   }
   @Get(":id")
   getOgrenciById(@Res() res: Response, @Param("id") id: number) {
-    console.log("-------------");
-    if (!id || !lodash.isString(id)) {
+    if (!id) {
       return res
         .status(HttpStatus.BAD_REQUEST)
         .json(ResultPackage.failed("Ne biçim sorgu lan bu"));
     }
     this.ogrs
-      .findOgrenciById(id)
+      .findOgrenciByOgrId([id])
       .then(data => {
+        console.log("idididididi", id);
         res.status(HttpStatus.OK).json(ResultPackage.success(data));
       })
       .catch(() =>

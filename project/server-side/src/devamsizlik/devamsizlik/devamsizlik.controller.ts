@@ -24,4 +24,19 @@ export class DevamsizlikController {
         res.status(HttpStatus.OK).json(ResultPackage.failed());
       });
   }
+
+  // @Get(":hashtag")
+  // getAttendance(@Res() res: Response, @Param("hashtag") id: number) {
+  //   this.devSer
+  //     .getAttendanceByDersId(id)
+  //     .then(result => {
+  //       // result.forEach(element => {
+  //       //   // if (element.geo) this.devSer.saveToDevmasizlikTalbe(element);
+  //       // });
+  //       res.status(HttpStatus.OK).json(ResultPackage.success(result));
+  //     })
+  //     .catch(() => {
+  //       res.status(HttpStatus.OK).json(ResultPackage.failed());
+  //     });
+  // }
 }

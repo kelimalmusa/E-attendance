@@ -1,10 +1,15 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Inject, forwardRef } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { Hoca } from "src/models/hoca";
 import * as lodash from "lodash";
+import { DersService } from "src/ders/ders/ders.service";
+import { rejects } from "assert";
 @Injectable()
 export class HocaService {
-  constructor(private dbs: DatabaseService) {}
+  constructor(
+    private dbs: DatabaseService,
+    @Inject(forwardRef(() => DersService)) private readonly derSer: DersService
+  ) {}
   insertHoca(newHoca: Hoca): Promise<Hoca> {
     return new Promise((resolve, reject) => {
       this.dbs
@@ -39,8 +44,19 @@ export class HocaService {
         .query(`select * from hoca where hoca_id in (${dollars})`, hocaIdList)
         .then(result => {
           if (!result) return reject();
-          console.log(result.rows);
-          resolve(result);
+          this.derSer
+            .getDersByHocaId(hocaIdList)
+            .then(req => {
+              const dersList = lodash.groupBy(req, "ders_hoca_id");
+              result.rows.forEach(element => {
+                element.ders = dersList[element.hoca_id];
+              });
+              resolve(result);
+            })
+            .catch(e => {
+              console.error(e);
+              reject();
+            });
         })
         .catch(e => {
           console.error(e);
@@ -55,8 +71,20 @@ export class HocaService {
         .query("select * from hoca")
         .then(result => {
           if (!result) return reject();
-          console.dir(result);
-          return resolve(result);
+          const hocaIdList = result.rows.map(e => e.hoca_id);
+          this.derSer
+            .getDersByHocaId(hocaIdList)
+            .then(req => {
+              const dersList = lodash.groupBy(req, "ders_hoca_id");
+              result.rows.forEach(element => {
+                element.ders = dersList[element.hoca_id];
+              });
+              return resolve(result.rows);
+            })
+            .catch(e => {
+              console.error(e);
+              reject();
+            });
         })
         .catch(e => {
           console.error(e);

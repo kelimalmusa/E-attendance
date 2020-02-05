@@ -1,12 +1,15 @@
 import * as lodash from "lodash";
-import { Injectable, Controller } from "@nestjs/common";
+import { Injectable, Controller, Inject, forwardRef } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { Ogrenci, Ders } from "src/models/models";
 import { DersService } from "src/ders/ders/ders.service";
 @Injectable()
 export class OgrenciService {
   tmp: Ogrenci = new Ogrenci();
-  constructor(private dbs: DatabaseService, private dersSer: DersService) {
+  constructor(
+    private dbs: DatabaseService,
+    @Inject(forwardRef(() => DersService)) private dersSer: DersService
+  ) {
     this.tmp.ders = new Array<Ders>();
   }
   insertStudent(newOgrenci: Ogrenci): Promise<any> {
@@ -87,43 +90,51 @@ export class OgrenciService {
         });
     });
   }
-  findOgrenciByOgrId(id: number): Promise<any> {
+  findOgrenciByOgrId(ogrIdList: number[]): Promise<any> {
     return new Promise((resolve, reject) => {
+      const dollars = ogrIdList.map((_, index) => "$" + (index + 1));
       this.dbs // bura yeni yapıldı dikkatli oku ve tüm fonksiyonları buna göre yap
         .getPool()
-        .query("select * from ogrenci where ogr_id =$1", [id])
+        .query(`select * from ogrenci where ogr_id in (${dollars})`, ogrIdList)
         .then(result => {
+          console.log("result----", result);
           if (!result) return reject();
-          console.dir(result);
-          return resolve(result);
-        })
-        .catch(e => {
-          console.error(e);
-          reject();
+          // const ogrenciIdList = result.rows.map(i => i.ogr_id);
+          this.dersSer
+            .getDersByOgrencId(ogrIdList)
+            .then(dersReq => {
+              console.log("--------------------------", dersReq);
+              if (dersReq.rowCount) {
+                const dersList = lodash.groupBy(dersReq.rows, "ogr_id");
+                result.rows.forEach(element => {
+                  element.ders = dersList[element.ogr_id];
+                  return resolve(result.rows);
+                });
+              }
+              resolve(result);
+            })
+            .catch(e => {
+              console.error(e);
+              reject();
+            });
         });
     });
   }
-  findOgrenciById(id: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.dbs // bura yeni yapıldı dikkatli oku ve tüm fonksiyonları buna göre yap
-        .getPool()
-        .query("select * from ogrenci where ogr_id =$1", [id])
-        .then(async result => {
-          // async e dikkat!!!!!!!!
-          if (!result) return reject();
-          await this.dersSer.getDersByOgrencId([id]).then(res => {
-            this.tmp = result.rows[0];
-            this.tmp.ders = res;
-          });
-          console.dir(result.rows);
-          return resolve(result.rows);
-        })
-        .catch(e => {
-          console.error(e);
-          reject();
-        });
-    });
-  }
+  // findOgrenciById(id: number): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     this.dbs // bura yeni yapıldı dikkatli oku ve tüm fonksiyonları buna göre yap
+  //       .getPool()
+  //       .query("select * from ogrenci where ogr_id =$1", [id])
+  //       .then(result => {
+  //         if (!result) return reject();
+  //         return resolve(result.rows);
+  //       })
+  //       .catch(e => {
+  //         console.error(e);
+  //         reject();
+  //       });
+  //   });
+  // }
 
   findOgrenciByOgrNo(ogrNo: number): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -184,6 +195,25 @@ export class OgrenciService {
         .then(result => {
           if (!result) return reject();
           return resolve();
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
+  getOgrenciByDersId(dersIdList: number[]): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const dollars = dersIdList.map((_, index) => "$" + (index + 1));
+      this.dbs
+        .getPool()
+        .query(
+          `select * from ogrenci inner join ogrenci_kayit on ogrenci_kayit.ders_id in (${dollars}) and ogrenci_kayit.ogr_id=ogrenci.ogr_id`,
+          dersIdList
+        )
+        .then(result => {
+          if (!result || !result.rowCount) return reject();
+          return resolve(result.rows);
         })
         .catch(e => {
           console.error(e);

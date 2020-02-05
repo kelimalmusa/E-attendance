@@ -1,3 +1,5 @@
+import { Hoca } from "./hoca";
+
 export class Ders {
   ders_id!: number;
   ders_code!: string;
@@ -9,5 +11,5 @@ export class Ders {
   ders_hoca_id!: number;
   ders_salon!: string;
   // fetch only
-  ders_hoca!: Ders;
+  ders_hoca!: Hoca;
 }

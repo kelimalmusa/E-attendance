@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Inject, forwardRef } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { Ders } from "src/models/models";
 import { QueryResult } from "pg";
@@ -9,7 +9,10 @@ import { promises } from "dns";
 @Injectable()
 export class DersService {
   dersList: Ders[];
-  constructor(private dbs: DatabaseService, private hocaSer: HocaService) {
+  constructor(
+    private dbs: DatabaseService,
+    @Inject(forwardRef(() => HocaService)) private hocaSer: HocaService
+  ) {
     this.dersList = new Array<Ders>();
   }
   insertNewDers(newDers: Ders): Promise<any> {
@@ -83,7 +86,6 @@ export class DersService {
             });
             resolve(result.rows);
           });
-          console.log(result.rows);
         })
         .catch(e => {
           console.error(e);
@@ -104,7 +106,7 @@ export class DersService {
           const hocaId = [result.rows[0].ders_hoca_id];
           this.hocaSer.getHocaById(hocaId).then(res => {
             result.rows[0].ders_hoca = res.rows[0];
-            return resolve(result);
+            return resolve(result.rows);
           });
         })
         .catch(e => {
@@ -124,6 +126,41 @@ export class DersService {
           }
           console.dir(result);
           resolve(result);
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
+  getDersByHocaId(hocaIdList: number[]): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const dollars = hocaIdList.map((_, index) => "$" + (index + 1));
+      this.dbs
+        .getPool()
+        .query(
+          `select * from ders where ders_hoca_id in (${dollars})`,
+          hocaIdList
+        )
+        .then(result => {
+          if (!result) return reject();
+          resolve(result.rows);
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
+  getDersById(dersId: number[]): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const dollars = dersId.map((_, index) => "$" + (index + 1));
+      this.dbs
+        .getPool()
+        .query(`select * from ders where ders_id in (${dollars})`, dersId)
+        .then(result => {
+          if (!result) return reject();
+          resolve(result.rows);
         })
         .catch(e => {
           console.error(e);
@@ -159,7 +196,7 @@ export class DersService {
           ogrenciIdList
         )
         .then(result => {
-          if (!result || !result.rowCount) return reject();
+          if (!result) return reject();
           return resolve(result);
         })
         .catch(e => {

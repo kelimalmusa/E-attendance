@@ -3,6 +3,9 @@ import { DatabaseService } from "src/database/service/database.service";
 import { TwitterService } from "src/twitter/twitter/twitter.service";
 import { TweetService } from "src/tweet/tweet/tweet.service";
 import { OgrenciService } from "src/ogrenci/ogrenci/ogrenci.service";
+import * as lodash from "lodash";
+import { Ogrenci, Tweet } from "src/models/models";
+import { DersService } from "src/ders/ders/ders.service";
 
 @Injectable()
 export class DevamsizlikService {
@@ -11,7 +14,8 @@ export class DevamsizlikService {
     private dbs: DatabaseService,
     private twitterSer: TwitterService,
     private tweetSer: TweetService,
-    private ogrSer: OgrenciService
+    private ogrSer: OgrenciService,
+    private dersSer: DersService
   ) {}
   getAttendance(hashtag: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -41,6 +45,7 @@ export class DevamsizlikService {
         });
     });
   }
+  //burada istersek by ders Id istersek de by ders Hashtag yapabiliriz
 
   getDersId(hashtag: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -60,3 +65,33 @@ export class DevamsizlikService {
     });
   }
 }
+//gerekli
+//
+//  const devamsizlik_list = ogrIdList.map(ogrId => {
+//   const ogrenciTweets = twets.filter(i => i.user.id === ogrId);
+//   let tweetId = null;
+//   if (ogrenciTweets.length) {
+//     const lastTweet = lodash.last(ogrenciTweets);
+//     tweetId = lastTweet.id;
+//   }
+//   return [ogrId, tweetId];
+// });
+
+// const a = [];
+// let sayi = 0;
+// for (let i = 1; i <= devamsizlik_list.length; i++) {
+//   a.push([]);
+//   for (let i2 = 1; i2 <= 2; i2++) {
+//     lodash.last(a).push("$" + ++sayi);
+//   }
+// }
+
+// const values = lodash.flatten(
+//   devamsizlik_list.map(i => lodash.values(i))
+// );
+
+// console.log(a.map(i => `(${i.join()})`).join());
+// // console.log("values", values);
+// console.log("aaaaa", a);
+
+//
