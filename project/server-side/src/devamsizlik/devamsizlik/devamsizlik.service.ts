@@ -78,6 +78,7 @@ export class DevamsizlikService {
           console.log("tweetIdList", tweetIdList);
           ogrenciIdList = result2.map(ogrId => ogrId.tweet.user.id);
           console.log("ogrenciIdList", ogrenciIdList);
+          this.savetoDevamsizlikTable(tweetIdList,ogrenciIdList,dersId);
         })
         .catch(e => {
           console.error(e);
@@ -91,11 +92,25 @@ export class DevamsizlikService {
     ogrenciIdList: number[],
     dersId: number
   ) {
+    const dollars = this.createDollars(ogrenciIdList);
     this.dbs
       .getPool()
       .query(
-        `insert into devamsizlik (ogr_id,ders_id,tweet_id,islem_location,islem_tarih) values `
+        `insert into devamsizlik (ogr_id,ders_id,tweet_id,islem_location,islem_tarih) values ${dollars}`,
+        [tweetIdList,tweetIdList,tweetIdList,'asd',"tweetIdList"]
       );
+  }
+  createDollars(length) {
+    let a = [];
+    let sayi = 0;
+    for (let i = 0; i < length; i++) {
+      a = new Array();
+    }
+    for (let j = 0; j < 5; j++) {
+      a[j] = "$" + ++sayi;
+    }
+    let b = a.map(i => `(${lodash.join(a, ",")})`).join();
+    return b;
   }
 }
 //gerekli
