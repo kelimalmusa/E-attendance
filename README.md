@@ -17,6 +17,17 @@
 <hr>
 </br>
 
+<h3> Tamalanan işlemler </h3>
+<p>
+1- Ders tablosuna dersleri ekleme,öğrencini aktif döenmde seçtiği dersleri kayit tablosuna ekleme, tüm dersleri şartsız çekme, ders koduna göre ders güncelleme, ders id'sine göre dersçekme, ders koduna veya ders ismine göre ders çekme, ders hocası id'sine göre ders çekme (hocası olan şu dersi çek),ogrenci id'sine göre ders çekme (bu öğrencinin aldığı dersleri çek) ve ders koduna göre ders silme işlemini yapabiliyoruz. Ayrıca dersin hocasını da ders.hoca nesnesine basıyoruz</br></br>
+2- Ögrenci tablosuna öğrenci ekleme, şartsız tüm öğrencileri çekme, öğrenci id'sine göre öğrenci çekme, öğrenci numarasına göre öğrenci çekme, öğrenci numarasına göre öğrenci silme, öğrenci numarasına göre öğrenci güncelleme ve belli bir dersi alan öğrencileri çekme işlemini yapabiliyoruz. Ayrıca öğrencinin aldığı tüm dersleri öğrenci.ders[] dizisine basıyoruz </br></br>
+3- Yeni bir hoca ekleme, hoca id'sine göre hoca çekme, tüm hocaları çekme, hoca ismine göre hoca silme işlemini yapabiliyoruz. Ayrıca çekilen tüm hocalar için hocanın verdiği dersleri de hoca.ders[] dizisine basıyoruz. </br></br>
+4- belli hashtaga göre yapılan tweetleri twitterden toplayıp tweeti, ilgili dersi, tweeti yapan öğrenciyi, tarihi ve tweetin lokasyonunu tweet tablosuna ekleme, yapılan tweetlerin lokasyonunun ortalamasını alıp tweetlerin geçerliliğini konuma göre kontrol edip devamsizlik tablosuna ekleme, veritabanından öğrenci id'sine göre tweetleri çekme, ders id'sine göre tweetleri veritabanından çekme işlemini yapabiliyoruz. Ayrıca tweeti yapan öğrenciyi ve ilgili dersi tweetin içinde bulunan tweet.ogrenci ve tweet.ders nesnelerine basıyoruz. </br></br>
+</p>
+</br>
+<hr>
+</br>
+
 # Problemler
 
 1- Resim çekip konum eklemeye çalışıldığında eğer google mapst'te konum doğru değilse twitter doğru konum getiremiyor; google map'i açıp konumu güncelleyince twitter doğru konumu çekiyor ve artık tweet atabiliyoruz (doğru konumdan);
