@@ -69,6 +69,8 @@ export class DevamsizlikService {
     return new Promise((resolve, reject) => {
       let ogrenciIdList: number[];
       let tweetIdList: number[];
+      let islemLocationList: string[];
+      let tarihList: string[];
       this.tweetSer
         .getTweetFromDBByDersId(dersId)
         .then(result2 => {
@@ -78,7 +80,31 @@ export class DevamsizlikService {
           console.log("tweetIdList", tweetIdList);
           ogrenciIdList = result2.map(ogrId => ogrId.tweet.user.id);
           console.log("ogrenciIdList", ogrenciIdList);
-          this.savetoDevamsizlikTable(tweetIdList,ogrenciIdList,dersId);
+          islemLocationList = result2.map(location => {
+            console.log("location.geo", location);
+            return location.tweet.geo ? location.tweet.geo.coordinates : null;
+          });
+          console.log("locationList", islemLocationList);
+          tarihList = result2.map(tarih => tarih.tweet.created_at);
+          console.log("tarihList", tarihList);
+          console.log(result2);
+          const avr = this.tweetSer.getAverage(result2);
+          console.log("avr", avr);
+          // burada tweetlerin lokasyonunu kontrol etmek gerek ama for each içinde o yüzden düşünmek ve daha mantıklı yöntem var mı diye araştırmak lazım
+          let controlledList = [];
+          controlledList.push(
+            result2.map(i => this.tweetSer.controlLocation(i.tweet, avr))
+          );
+          console.log("controlledList", controlledList);
+          // this.tweetSer.controlLocation(result2, avr);
+
+          this.savetoDevamsizlikTable(
+            tweetIdList,
+            ogrenciIdList,
+            dersId,
+            islemLocationList,
+            tarihList
+          );
         })
         .catch(e => {
           console.error(e);
@@ -90,28 +116,73 @@ export class DevamsizlikService {
   savetoDevamsizlikTable(
     tweetIdList: number[],
     ogrenciIdList: number[],
-    dersId: number
+    dersId: number,
+    islemLocationList: string[],
+    tarihList: string[]
   ) {
     const dollars = this.createDollars(ogrenciIdList);
+    console.log(ogrenciIdList.length);
+    // console.log("dollars", dollars);
+    console.log("tweetIdList", tweetIdList);
+    console.log("ogrenciIdList", ogrenciIdList);
+    const values = this.getValues(
+      ogrenciIdList,
+      dersId,
+      tweetIdList,
+      islemLocationList,
+      tarihList
+    );
+    console.log("values", values);
     this.dbs
       .getPool()
       .query(
         `insert into devamsizlik (ogr_id,ders_id,tweet_id,islem_location,islem_tarih) values ${dollars}`,
-        [tweetIdList,tweetIdList,tweetIdList,'asd',"tweetIdList"]
+        values
       );
   }
+  getValues(
+    ogrenciIdList: number[],
+    dersId: number,
+    tweetIdList: number[],
+    islemLocationList: string[],
+    tarihList: string[]
+  ) {
+    let values = [];
+    for (let i = 0, j = 0; i < ogrenciIdList.length; i++) {
+      values[j++] = ogrenciIdList[i];
+      values[j++] = dersId;
+      values[j++] = tweetIdList[i];
+      values[j++] = islemLocationList[i];
+      values[j++] = tarihList[i];
+    }
+    return values;
+  }
   createDollars(length) {
-    let a = [];
+    const a = [];
     let sayi = 0;
-    for (let i = 0; i < length; i++) {
-      a = new Array();
+    for (let i = 1; i <= length.length; i++) {
+      a.push([]);
+      for (let i2 = 1; i2 <= 5; i2++) {
+        lodash.last(a).push("$" + ++sayi);
+      }
     }
-    for (let j = 0; j < 5; j++) {
-      a[j] = "$" + ++sayi;
-    }
-    let b = a.map(i => `(${lodash.join(a, ",")})`).join();
+    const values = lodash.flatten(length.map(i => lodash.values(i)));
+
+    const b = a.map(i => `(${i.join()})`).join();
+    console.log("aaaaa", b);
     return b;
   }
+  //   let a = [];
+  //   let sayi = 0;
+  //   for (let i = 0; i < length; i++) {
+  //     a = new Array();
+  //   }
+  //   for (let j = 0; j < 5; j++) {
+  //     a[j] = "$" + ++sayi;
+  //   }
+  //   let b = a.map(i => `(${lodash.join(a, ",")})`).join();
+  //   return b;
+  // }
 }
 //gerekli
 //
@@ -141,5 +212,3 @@ export class DevamsizlikService {
 // console.log(a.map(i => `(${i.join()})`).join());
 // // console.log("values", values);
 // console.log("aaaaa", a);
-
-//

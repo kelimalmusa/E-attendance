@@ -4,6 +4,7 @@ import { QueryResult } from "pg";
 import { TwitterService } from "src/twitter/twitter/twitter.service";
 import { DersService } from "src/ders/ders/ders.service";
 import { OgrenciService } from "src/ogrenci/ogrenci/ogrenci.service";
+import * as lodash from "lodash";
 
 @Injectable()
 export class TweetService {
@@ -49,11 +50,12 @@ export class TweetService {
       length = 0;
     data.forEach(element => {
       if (
-        (element.geo && element.user.name == "Kelim Almusa") ||
-        element.user.name === "Muhammed Miraç Kurt"
+        element.tweet.geo
+        //   && element.tweet.user.name == "Kelim Almusa") ||
+        // element.tweet.user.name === "Muhammed Miraç Kurt"
       ) {
-        boylam += element.geo.coordinates[0];
-        enlem += element.geo.coordinates[1];
+        boylam += element.tweet.geo.coordinates[0];
+        enlem += element.tweet.geo.coordinates[1];
         length++;
       }
     });
@@ -165,7 +167,11 @@ export class TweetService {
           this.ogrSer
             .findOgrenciByOgrId(ogrIdList)
             .then(res => {
-              result.rows.map(e => (e.ogrenci = res[0]));
+              const ogrList = lodash.groupBy(res, "ogr_id");
+              result.rows.map(e => {
+                e.ogrenci = ogrList[e.ogr_id][0];
+              });
+
               // resolve(result.rows);
             })
             .catch(e => {

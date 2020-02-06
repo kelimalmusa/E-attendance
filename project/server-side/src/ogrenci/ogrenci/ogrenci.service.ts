@@ -78,6 +78,7 @@ export class OgrenciService {
           const ogrenciList = result.rows.map(i => i.ogr_id);
           this.dersSer.getDersByOgrencId(ogrenciList).then(dersReq => {
             const dersList = lodash.groupBy(dersReq.rows, "ogr_id");
+            // console.log("dersList", dersList);
             result.rows.forEach(element => {
               element.ders = dersList[element.ogr_id];
             });
@@ -109,7 +110,7 @@ export class OgrenciService {
                   return resolve(result.rows);
                 });
               }
-              resolve(result);
+              resolve(result.rows);
             })
             .catch(e => {
               console.error(e);
