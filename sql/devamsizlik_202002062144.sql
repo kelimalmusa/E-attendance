@@ -1,0 +1,4 @@
+INSERT INTO public.devamsizlik (id,ogr_id,ders_id,tweet_id,islem_location,islem_tarih,islem_gecerlilik) VALUES 
+(848,1259478528,2,1224027184727306200,'{"38.3404712","38.4351291"}','Sun Feb 02 17:49:56 +0000 2020',NULL)
+,(849,1025830942324273200,2,1222526805623607300,NULL,'Wed Jan 29 14:27:58 +0000 2020',NULL)
+;

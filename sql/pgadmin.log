@@ -1,0 +1,14 @@
+ERROR  : 17:24:24: Error: HATA:  "proisagg" sütunu mevcut değil
+LINE 9:  WHERE proisagg = FALSE AND pronamespace = 2200::oid
+               ^
+HINT:  Belki  "pr.prolang" sütununu kullanmak istediniz
+ERROR  : 17:24:28: Error: HATA:  rel.relhasoids sütunu mevcut değil
+LINE 1: ...t_userbyid(rel.relowner) AS relowner, rel.relacl, rel.relhas...
+                                                             ^
+ERROR  : 17:24:29: Error: HATA:  "proisagg" sütunu mevcut değil
+LINE 9:  WHERE proisagg = FALSE AND pronamespace = 2200::oid
+               ^
+HINT:  Belki  "pr.prolang" sütununu kullanmak istediniz
+ERROR  : 17:28:42: Error: HATA:  "adminpack" uzantısı zaten mevcut
+ERROR  : 17:32:15: Error: HATA:  "postgres" veritabanına başka kullanıcılar tarafından erişilmektedir
+DETAIL:  Veritabanını kullanan 2 başka oturum var.
