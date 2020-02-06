@@ -167,6 +167,7 @@ export class TweetService {
           this.ogrSer
             .findOgrenciByOgrId(ogrIdList)
             .then(res => {
+              console.log("asdasdasd", ogrIdList);
               const ogrList = lodash.groupBy(res, "ogr_id");
               result.rows.map(e => {
                 e.ogrenci = ogrList[e.ogr_id][0];
