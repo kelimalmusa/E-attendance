@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Controller } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { TwitterService } from "src/twitter/twitter/twitter.service";
 import { TweetService } from "src/tweet/tweet/tweet.service";
@@ -87,7 +87,7 @@ export class DevamsizlikService {
           console.log("locationList", islemLocationList);
           tarihList = result2.map(tarih => tarih.tweet.created_at);
           console.log("tarihList", tarihList);
-          console.log(result2);
+          // console.log(result2);
           const avr = this.tweetSer.getAverage(result2);
           console.log("avr", avr);
           // burada tweetlerin lokasyonunu kontrol etmek gerek ama for each içinde o yüzden düşünmek ve daha mantıklı yöntem var mı diye araştırmak lazım
@@ -95,6 +95,7 @@ export class DevamsizlikService {
           controlledList.push(
             result2.map(i => this.tweetSer.controlLocation(i.tweet, avr))
           );
+          controlledList = lodash.flatten(controlledList);
           console.log("controlledList", controlledList);
           // this.tweetSer.controlLocation(result2, avr);
 
@@ -103,7 +104,8 @@ export class DevamsizlikService {
             ogrenciIdList,
             dersId,
             islemLocationList,
-            tarihList
+            tarihList,
+            controlledList
           );
         })
         .catch(e => {
@@ -118,7 +120,8 @@ export class DevamsizlikService {
     ogrenciIdList: number[],
     dersId: number,
     islemLocationList: string[],
-    tarihList: string[]
+    tarihList: string[],
+    controlledList: boolean[]
   ) {
     const dollars = this.createDollars(ogrenciIdList);
     console.log(ogrenciIdList.length);
@@ -130,13 +133,14 @@ export class DevamsizlikService {
       dersId,
       tweetIdList,
       islemLocationList,
-      tarihList
+      tarihList,
+      controlledList
     );
     console.log("values", values);
     this.dbs
       .getPool()
       .query(
-        `insert into devamsizlik (ogr_id,ders_id,tweet_id,islem_location,islem_tarih) values ${dollars}`,
+        `insert into devamsizlik (ogr_id,ders_id,tweet_id,islem_location,islem_tarih,islem_gecerlilik) values ${dollars}`,
         values
       );
   }
@@ -145,7 +149,8 @@ export class DevamsizlikService {
     dersId: number,
     tweetIdList: number[],
     islemLocationList: string[],
-    tarihList: string[]
+    tarihList: string[],
+    controlledList: boolean[]
   ) {
     let values = [];
     for (let i = 0, j = 0; i < ogrenciIdList.length; i++) {
@@ -154,6 +159,7 @@ export class DevamsizlikService {
       values[j++] = tweetIdList[i];
       values[j++] = islemLocationList[i];
       values[j++] = tarihList[i];
+      values[j++] = controlledList[i];
     }
     return values;
   }
@@ -162,7 +168,7 @@ export class DevamsizlikService {
     let sayi = 0;
     for (let i = 1; i <= length.length; i++) {
       a.push([]);
-      for (let i2 = 1; i2 <= 5; i2++) {
+      for (let i2 = 1; i2 <= 6; i2++) {
         lodash.last(a).push("$" + ++sayi);
       }
     }
