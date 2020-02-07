@@ -18,7 +18,7 @@ export class TweetService {
   collectTweets(hastag: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.derSer.findDersByDersCodeOrName(hastag).then(result => {
-        // console.log("dersasdasdasdsa", result);
+        if (!result) return reject();
         this.dersId = result[0].ders_id;
       });
       this.twitterService
@@ -50,12 +50,12 @@ export class TweetService {
       length = 0;
     data.forEach(element => {
       if (
-        element.tweet.geo
+        element.geo
         //   && element.tweet.user.name == "Kelim Almusa") ||
         // element.tweet.user.name === "Muhammed Miraç Kurt"
       ) {
-        boylam += element.tweet.geo.coordinates[0];
-        enlem += element.tweet.geo.coordinates[1];
+        boylam += element.geo.coordinates[0];
+        enlem += element.geo.coordinates[1];
         length++;
       }
     });
@@ -164,16 +164,14 @@ export class TweetService {
           if (!result) return reject();
           //gelen tweete tweeti yapan öğrenciyi ekleme
           const ogrIdList = result.rows.map(i => i.ogr_id);
+          if (!ogrIdList) return resolve();
           this.ogrSer
             .findOgrenciByOgrId(ogrIdList)
             .then(res => {
-              console.log("asdasdasd", ogrIdList);
               const ogrList = lodash.groupBy(res, "ogr_id");
               result.rows.map(e => {
-                e.ogrenci = ogrList[e.ogr_id][0];
+                e.ogrenci = ogrList[e.ogr_id];
               });
-
-              // resolve(result.rows);
             })
             .catch(e => {
               console.error(e);
@@ -188,6 +186,7 @@ export class TweetService {
             .getDersById(dersIdList)
             .then(req => {
               result.rows.map(e => (e.ders = req[0]));
+              // console.log(result.rows);
               return resolve(result.rows);
               // end of gelen tweete ilgili dersi ekleme
             })

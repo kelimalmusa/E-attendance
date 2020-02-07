@@ -107,8 +107,8 @@ export class OgrenciService {
                 const dersList = lodash.groupBy(dersReq.rows, "ogr_id");
                 result.rows.forEach(element => {
                   element.ders = dersList[element.ogr_id];
-                  return resolve(result.rows);
                 });
+                return resolve(result.rows);
               }
               resolve(result.rows);
             })
