@@ -44,6 +44,8 @@ export class HocaService {
         .query(`select * from hoca where hoca_id in (${dollars})`, hocaIdList)
         .then(result => {
           if (!result) return reject();
+          if (!result.rowCount)
+            return resolve("Girilen kriterlere göre veri bulunamadı");
           this.derSer
             .getDersByHocaId(hocaIdList)
             .then(req => {
@@ -51,7 +53,7 @@ export class HocaService {
               result.rows.forEach(element => {
                 element.ders = dersList[element.hoca_id];
               });
-              resolve(result);
+              resolve(result.rows);
             })
             .catch(e => {
               console.error(e);
