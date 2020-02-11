@@ -51,8 +51,8 @@ export class TweetService {
     data.forEach(element => {
       if (
         element.geo
-        //   && element.tweet.user.name == "Kelim Almusa") ||
-        // element.tweet.user.name === "Muhammed Miraç Kurt"
+        // &&(element.tweet.user.name == "Kelim Almusa" ||
+        //   element.tweet.user.name === "Muhammed Miraç Kurt")
       ) {
         boylam += element.geo.coordinates[0];
         enlem += element.geo.coordinates[1];

@@ -72,7 +72,7 @@ export class DevamsizlikService {
       let islemLocationList: string[];
       let tarihList: string[];
       this.tweetSer
-        .getTweetFromDBByDersId(dersId)
+        .getTweetFromDBByDersId(dersId) // buraya ileride hem ders id hem de tarih verilecek
         .then(result2 => {
           if (!result2) return reject();
           resolve(result2);
