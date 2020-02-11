@@ -22,7 +22,7 @@ export class DersController {
     this.deS
       .insertNewDers(body)
       .then(result => {
-        res.status(HttpStatus.OK).json(ResultPackage.success(result));
+        res.status(HttpStatus.OK).json(ResultPackage.success(result.rows));
       })
       .catch(() => {
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());
@@ -50,7 +50,7 @@ export class DersController {
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());
       });
   }
-  @Delete()
+  @Delete(":dersCode")
   deleteDersByDersCode(
     @Res() res: Response,
     @Param("dersCode") dersCode: string
@@ -73,7 +73,7 @@ export class DersController {
     this.deS
       .updateDersByDersCode(ders, dersCode)
       .then(result => {
-        res.status(HttpStatus.OK).json(ResultPackage.success(result));
+        res.status(HttpStatus.OK).json(ResultPackage.success(result.rows));
       })
       .catch(() => {
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());

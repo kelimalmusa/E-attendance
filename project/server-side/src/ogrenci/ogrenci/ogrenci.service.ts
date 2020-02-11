@@ -75,6 +75,7 @@ export class OgrenciService {
         .query("select * from ogrenci")
         .then(result => {
           if (!result) return reject(); //TODO veritabanından gelen result nesnesini Ogrenci veya ilgili nesneye atamamız gerek
+          if (!result.rowCount) return resolve("Veri bulunamadı");
           const ogrenciList = result.rows.map(i => i.ogr_id);
           this.dersSer.getDersByOgrencId(ogrenciList).then(dersReq => {
             const dersList = lodash.groupBy(dersReq.rows, "ogr_id");
@@ -99,6 +100,8 @@ export class OgrenciService {
         .query(`select * from ogrenci where ogr_id in (${dollars})`, ogrIdList)
         .then(result => {
           if (!result) return reject();
+          if (!result.rowCount)
+            return resolve("Girilen kriterlere göre veri bulunamadı");
           // const ogrenciIdList = result.rows.map(i => i.ogr_id);
           this.dersSer
             .getDersByOgrencId(ogrIdList)
@@ -146,10 +149,11 @@ export class OgrenciService {
             .getDersByOgrencId([result.rows[0].ogr_id])
             .then(res => {
               this.tmp = result.rows[0];
-              this.tmp.ders = res;
+              this.tmp.ders = res.rows;
             });
-          console.dir(result.rows);
-          return resolve(result.rows);
+          console.log(result.rows);
+
+          return resolve(result);
         })
         .catch(e => {
           console.error(e);

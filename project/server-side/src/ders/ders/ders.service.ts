@@ -103,7 +103,12 @@ export class DersService {
         )
         .then(result => {
           if (!result) return reject();
+<<<<<<< HEAD
+          if (!result.rowCount)
+            return resolve("Girilen kriterlere göre veri bulunamadı");
+=======
           if (!result.rowCount) return resolve();
+>>>>>>> ad2b41c483be522a421b026f11255741db10bc02
           const hocaId = [result.rows[0].ders_hoca_id];
           this.hocaSer.getHocaById(hocaId).then(res => {
             result.rows[0].ders_hoca = res.rows[0];

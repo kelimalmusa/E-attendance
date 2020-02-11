@@ -57,7 +57,6 @@ export class OgrenciController {
   }
   @Get("ogrenci-no/:ogrNo")
   getOgrenciByOgrNo(@Res() res: Response, @Param("ogrNo") ogrNo: number) {
-    console.log("-------------");
     if (!ogrNo || !lodash.isString(ogrNo)) {
       return res
         .status(HttpStatus.BAD_REQUEST)
@@ -66,7 +65,7 @@ export class OgrenciController {
     this.ogrs
       .findOgrenciByOgrNo(ogrNo)
       .then(data => {
-        res.status(HttpStatus.OK).json(ResultPackage.success(data));
+        res.status(HttpStatus.OK).json(ResultPackage.success(data.rows));
       })
       .catch(() =>
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed())
@@ -74,7 +73,6 @@ export class OgrenciController {
   }
   @Delete("delete-ogrenci/:ogrNo")
   deleteOgrByOgrNo(@Res() res: Response, @Param("ogrNo") ogrNo: number) {
-    console.log("-------------");
     if (!ogrNo || !lodash.isString(ogrNo)) {
       return res
         .status(HttpStatus.BAD_REQUEST)
