@@ -3,41 +3,65 @@ import { Injectable, Controller, Inject, forwardRef } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { Ogrenci, Ders } from "src/models/models";
 import { DersService } from "src/ders/ders/ders.service";
+import { YoklamaService } from "src/yoklama/yoklama/yoklama.service";
+import { TwitterService } from "src/twitter/twitter/twitter.service";
+import { rejects } from "assert";
 @Injectable()
 export class OgrenciService {
   tmp: Ogrenci = new Ogrenci();
   constructor(
     private dbs: DatabaseService,
-    @Inject(forwardRef(() => DersService)) private dersSer: DersService
+    @Inject(forwardRef(() => YoklamaService)) private yokSer: YoklamaService,
+    @Inject(forwardRef(() => DersService)) private dersSer: DersService,
+    @Inject(forwardRef(() => TwitterService)) private twitterSer: TwitterService
   ) {
     this.tmp.ders = new Array<Ders>();
   }
   insertStudent(newOgrenci: Ogrenci): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.dbs
-        .getPool()
-        .query(
-          //returnin ogr_id demek ekledikten sonra serial olan ogr_id değerinin döndür demektir
-          "insert into ogrenci (ogr_no,ogr_name,ogr_surname,ogr_ogrenim_turu,ogr_user_id,ogr_username,ogr_password,ogr_email)values($1,$2,$3,$4,$5,$6,$7,$8) returning ogr_id",
-          [
-            newOgrenci.ogr_no,
-            newOgrenci.ogr_name,
-            newOgrenci.ogr_surname,
-            newOgrenci.ogr_ogrenim_turu,
-            newOgrenci.ogr_user_id,
-            newOgrenci.username,
-            newOgrenci.password,
-            newOgrenci.email
-          ]
-        )
+      this.twitterSer
+        .findUserId(newOgrenci.username)
         .then(result => {
-          if (!result || !result.rowCount) return reject();
-          newOgrenci.ders.forEach(element => {
-            // şuan öğrenci nesnesi dersler: number dizisi içeriyor, ileri zaman da numberden Ders nesnesine çevirmek gerekebilir
-            this.insertStudentsCourses(result.rows[0].ogr_id, element.ders_id);
-          });
-          console.dir(result);
-          return resolve();
+          const ogr_id = result;
+          if (!result) return reject();
+          this.dbs
+            .getPool()
+            .query(
+              //returnin ogr_id demek ekledikten sonra serial olan ogr_id değerinin döndür demektir
+              "insert into ogrenci (ogr_id,ogr_no,ogr_name,ogr_surname,ogr_ogrenim_turu,ogr_user_id,ogr_username,ogr_password,ogr_email)values($1,$2,$3,$4,$5,$6,$7,$8,$9) returning ogr_id",
+              [
+                ogr_id,
+                newOgrenci.ogr_no,
+                newOgrenci.ogr_name,
+                newOgrenci.ogr_surname,
+                newOgrenci.ogr_ogrenim_turu,
+                newOgrenci.ogr_user_id,
+                newOgrenci.username,
+                newOgrenci.password,
+                newOgrenci.email
+              ]
+            )
+            .then(result => {
+              if (!result || !result.rowCount) return reject();
+              const dersIdList = newOgrenci.ders.map(i => i.ders_id);
+              this.yokSer.insertStudentAndDers(
+                result.rows[0].ogr_id,
+                dersIdList
+              );
+              newOgrenci.ders.forEach(element => {
+                // şuan öğrenci nesnesi dersler: number dizisi içeriyor, ileri zaman da numberden Ders nesnesine çevirmek gerekebilir
+                this.insertStudentsCourses(
+                  result.rows[0].ogr_id,
+                  element.ders_id
+                );
+              });
+              console.dir(result);
+              return resolve();
+            })
+            .catch(e => {
+              console.error(e);
+              reject();
+            });
         })
         .catch(e => {
           console.error(e);

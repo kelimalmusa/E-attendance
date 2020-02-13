@@ -9,6 +9,7 @@ import { DevamsizlikService } from "src/devamsizlik/devamsizlik/devamsizlik.serv
 import { OgrenciService } from "src/ogrenci/ogrenci/ogrenci.service";
 import { DersService } from "src/ders/ders/ders.service";
 import { HocaService } from "src/hoca/hoca/hoca.service";
+import { YoklamaService } from "src/yoklama/yoklama/yoklama.service";
 
 @Module({
   providers: [
@@ -17,7 +18,8 @@ import { HocaService } from "src/hoca/hoca/hoca.service";
     DevamsizlikService,
     OgrenciService,
     DersService,
-    HocaService
+    HocaService,
+    YoklamaService
   ],
   imports: [DatabaseModule, TwitterModule, DevamsizlikModule],
   controllers: [TweetController]

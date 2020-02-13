@@ -35,4 +35,24 @@ export class TwitterService {
         });
     });
   }
+  findUserId(hashtag: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      Twitter.get("users/show", {
+        screen_name: hashtag
+        // until: "2020-01-31"
+      })
+        .then(function(result: any) {
+          console.log(result.data);
+          // result.data.statuses.forEach(element => {
+          //   if (element.geo)
+          //     console.log(element.user.name, element.geo.coordinates);
+          // });
+          resolve(result.data.id);
+        })
+        .catch(e => {
+          console.error(e);
+          reject();
+        });
+    });
+  }
 }

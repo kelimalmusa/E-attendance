@@ -9,9 +9,10 @@ import { DersModule } from './ders/ders.module';
 import { TweetModule } from './tweet/tweet.module';
 import { TwitterModule } from './twitter/twitter.module';
 import { DevamsizlikModule } from './devamsizlik/devamsizlik.module';
+import { YoklamaModule } from './yoklama/yoklama.module';
 
 @Module({
-  imports: [DatabaseModule, DenemeModule, OgrenciModule, HocaModule, DersModule, TweetModule, TwitterModule, DevamsizlikModule],
+  imports: [DatabaseModule, DenemeModule, OgrenciModule, HocaModule, TweetModule, TwitterModule, DevamsizlikModule, YoklamaModule],
   controllers: [AppController],
   providers: [AppService]
 })
