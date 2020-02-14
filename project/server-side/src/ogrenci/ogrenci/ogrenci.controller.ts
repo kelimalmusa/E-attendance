@@ -48,7 +48,6 @@ export class OgrenciController {
     this.ogrs
       .findOgrenciByOgrId([id])
       .then(data => {
-        console.log("idididididi", id);
         res.status(HttpStatus.OK).json(ResultPackage.success(data));
       })
       .catch(() =>

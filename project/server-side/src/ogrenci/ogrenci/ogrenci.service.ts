@@ -8,15 +8,12 @@ import { TwitterService } from "src/twitter/twitter/twitter.service";
 import { rejects } from "assert";
 @Injectable()
 export class OgrenciService {
-  tmp: Ogrenci = new Ogrenci();
   constructor(
     private dbs: DatabaseService,
     @Inject(forwardRef(() => YoklamaService)) private yokSer: YoklamaService,
     @Inject(forwardRef(() => DersService)) private dersSer: DersService,
     @Inject(forwardRef(() => TwitterService)) private twitterSer: TwitterService
-  ) {
-    this.tmp.ders = new Array<Ders>();
-  }
+  ) {}
   insertStudent(newOgrenci: Ogrenci): Promise<any> {
     return new Promise((resolve, reject) => {
       this.twitterSer
@@ -27,7 +24,7 @@ export class OgrenciService {
           this.dbs
             .getPool()
             .query(
-              //returnin ogr_id demek ekledikten sonra serial olan ogr_id değerinin döndür demektir
+              //returning ogr_id demek ekledikten sonra serial olan ogr_id değerinin döndür demektir
               "insert into ogrenci (ogr_id,ogr_no,ogr_name,ogr_surname,ogr_ogrenim_turu,ogr_user_id,ogr_username,ogr_password,ogr_email)values($1,$2,$3,$4,$5,$6,$7,$8,$9) returning ogr_id",
               [
                 ogr_id,
@@ -171,10 +168,7 @@ export class OgrenciService {
           if (!result) return reject();
           await this.dersSer
             .getDersByOgrencId([result.rows[0].ogr_id])
-            .then(res => {
-              this.tmp = result.rows[0];
-              this.tmp.ders = res.rows;
-            });
+            .then(()  => {});
           console.log(result.rows);
 
           return resolve(result);
