@@ -19,7 +19,7 @@ export class TweetService {
     return new Promise((resolve, reject) => {
       this.derSer.findDersByDersCodeOrName(hastag).then(result => {
         if (!result) return reject();
-        this.dersId = result[0].ders_id;
+        if (result.rows) this.dersId = result[0].ders_id;
       });
       this.twitterService
         .findTweetByHashtag(hastag)
