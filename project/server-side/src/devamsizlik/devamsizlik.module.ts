@@ -9,6 +9,7 @@ import { OgrenciModule } from "src/ogrenci/ogrenci.module";
 import { DatabaseService } from "src/database/service/database.service";
 import { DersService } from "src/ders/ders/ders.service";
 import { HocaService } from "src/hoca/hoca/hoca.service";
+import { YoklamaService } from "src/yoklama/yoklama/yoklama.service";
 
 @Module({
   providers: [
@@ -17,7 +18,8 @@ import { HocaService } from "src/hoca/hoca/hoca.service";
     TwitterService,
     OgrenciService,
     DersService,
-    HocaService
+    HocaService,
+    YoklamaService
   ],
   imports: [DatabaseModule],
   controllers: [DevamsizlikController]

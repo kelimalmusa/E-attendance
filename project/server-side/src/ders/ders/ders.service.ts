@@ -201,7 +201,13 @@ export class DersService {
         )
         .then(result => {
           if (!result) return reject();
-          return resolve(result);
+          const hocaIdList = result.rows.map(i => i.ders_hoca_id);
+          this.hocaSer.getHocaById(hocaIdList).then(result2 => {
+            if (!result2) return reject();
+            const hocaList = lodash.groupBy(result2, "hoca_id");
+            result.rows.forEach(e => (e.hoca = hocaList[e.ders_hoca_id]));
+            return resolve(result);
+          });
         })
         .catch(e => {
           console.error(e);
