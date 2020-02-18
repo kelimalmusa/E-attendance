@@ -35,10 +35,10 @@ export class TwitterService {
         });
     });
   }
-  findUserId(hashtag: string): Promise<any> {
+  findUserId(username: string): Promise<any> {
     return new Promise((resolve, reject) => {
       Twitter.get("users/show", {
-        screen_name: hashtag
+        screen_name: username
         // until: "2020-01-31"
       })
         .then(function(result: any) {
