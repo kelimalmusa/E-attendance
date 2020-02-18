@@ -80,9 +80,11 @@ export class DersService {
           if (!result || !result.rowCount) return reject();
           const hocaIdList = result.rows.map(i => i.ders_hoca_id);
           this.hocaSer.getHocaById(hocaIdList).then(hocaRequest => {
-            const hocaList = lodash.groupBy(hocaRequest.rows, "hoca_id");
+            const hocaList = lodash.groupBy(hocaRequest, "hoca_id");
             result.rows.forEach(element => {
-              element.ders_hoca = hocaList[element.ders_hoca_id][0];
+              if (hocaList) {
+                element.ders_hoca = hocaList[element.ders_hoca_id][0];
+              }
             });
             resolve(result.rows);
           });
@@ -107,7 +109,7 @@ export class DersService {
             return resolve("Girilen kriterlere göre veri bulunamadı");
           const hocaId = [result.rows[0].ders_hoca_id];
           this.hocaSer.getHocaById(hocaId).then(res => {
-            result.rows[0].ders_hoca = res.rows[0];
+            result.rows[0].ders_hoca = res[0];
             return resolve(result.rows);
           });
         })

@@ -10,11 +10,8 @@ import { TwitterService } from "src/twitter/twitter/twitter.service";
 import { HocaModule } from "src/hoca/hoca.module";
 
 @Module({
-  providers: [
-    DersService,
-    HocaService,
-  ],
-  imports: [DatabaseModule,HocaModule],
+  providers: [DersService, HocaService],
+  imports: [DatabaseModule, HocaModule],
   controllers: [DersController]
 })
 export class DersModule {}

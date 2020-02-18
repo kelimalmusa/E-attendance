@@ -5,7 +5,6 @@ import { Ogrenci, Ders } from "src/models/models";
 import { DersService } from "src/ders/ders/ders.service";
 import { YoklamaService } from "src/yoklama/yoklama/yoklama.service";
 import { TwitterService } from "src/twitter/twitter/twitter.service";
-import { rejects } from "assert";
 @Injectable()
 export class OgrenciService {
   constructor(
