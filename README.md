@@ -40,6 +40,12 @@
 
 
 
+# Uzaktan sunucuya bağlanmak için gerekenler
+terminalı açıp "ssh root@64.227.116.189" komutunu çalıştırıp şifreyi girmek gerek
+
+service oluşturmak ve service i çalıştırmak veya durdurmak için bu linkteki videodan yardım alınabilir (https://www.youtube.com/watch?v=fYQBvjYQ63U)
+
+
 
 
 
