@@ -46,6 +46,10 @@ terminalı açıp "ssh root@64.227.116.189" komutunu çalıştırıp şifreyi gi
 service oluşturmak ve service i çalıştırmak veya durdurmak için bu linkteki videodan yardım alınabilir (https://www.youtube.com/watch?v=fYQBvjYQ63U)
 
 
+# ssh yüklemek için
+ "https://linuxize.com/post/how-to-enable-ssh-on-ubuntu-18-04/"
+
+
 
 
 
