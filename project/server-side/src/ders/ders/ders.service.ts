@@ -97,11 +97,13 @@ export class DersService {
   }
   findDersByDersCodeOrName(param: string): Promise<any> {
     return new Promise((resolve, reject) => {
+      const hashtag = param.split("_");
+      console.log("hashtag", hashtag);
       this.dbs
         .getPool()
         .query(
-          "select * from ders where ders_code ilike $1 or ders_name ilike $1",
-          ["%" + param + "%"]
+          "select * from ders where (ders_code ilike $1 or ders_name ilike $1) and ders_sube=$2",
+          ["%" + hashtag[1] + "%", hashtag[2]]
         )
         .then(result => {
           if (!result) return reject();

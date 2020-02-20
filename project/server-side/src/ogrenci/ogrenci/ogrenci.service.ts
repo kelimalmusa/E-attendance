@@ -167,7 +167,7 @@ export class OgrenciService {
           if (!result) return reject();
           await this.dersSer
             .getDersByOgrencId([result.rows[0].ogr_id])
-            .then(()  => {});
+            .then(() => {});
           console.log(result.rows);
 
           return resolve(result);

@@ -5,6 +5,7 @@ import { TwitterService } from "src/twitter/twitter/twitter.service";
 import { DersService } from "src/ders/ders/ders.service";
 import { OgrenciService } from "src/ogrenci/ogrenci/ogrenci.service";
 import * as lodash from "lodash";
+import { YoklamaService } from "src/yoklama/yoklama/yoklama.service";
 
 @Injectable()
 export class TweetService {
@@ -13,7 +14,8 @@ export class TweetService {
     private dbs: DatabaseService,
     private twitterService: TwitterService,
     private derSer: DersService,
-    private ogrSer: OgrenciService
+    private ogrSer: OgrenciService,
+    private yokSer: YoklamaService
   ) {}
   collectTweets(hastag: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -25,16 +27,17 @@ export class TweetService {
         .findTweetByHashtag(hastag)
         .then(result2 => {
           if (!result2) return reject();
-          let average = this.getAverage(result2);
-          result2.forEach(element => {
-            this.saveToDevmasizlikTalbe(
-              element,
-              this.controlLocation(element, average)
-            );
-          });
           result2.forEach(element => {
             this.saveTweets(element);
             // this.controlLocation(element, average);
+          });
+          let average = this.getAverage(result2);
+          result2.forEach(element => {
+            const ogrId = element.user.id;
+            const gecerlilik = this.controlLocation(element, average);
+            const tarih = element.created_at;
+            this.yokSer.saveToYoklama(ogrId, this.dersId, gecerlilik, tarih);
+            this.saveToDevmasizlikTalbe(element, gecerlilik);
           });
           return resolve(result2);
         })

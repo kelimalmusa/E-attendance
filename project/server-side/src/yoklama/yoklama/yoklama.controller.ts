@@ -1,7 +1,6 @@
 import { Controller, Get, Res, Param, HttpStatus } from "@nestjs/common";
 import { YoklamaService } from "./yoklama.service";
 import { Response } from "express";
-import { resolve } from "dns";
 import { ResultPackage } from "src/common/result-package";
 
 @Controller("yoklama")
