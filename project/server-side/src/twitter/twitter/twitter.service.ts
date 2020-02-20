@@ -15,6 +15,7 @@ export class TwitterService {
 
   findTweetByHashtag(hashtag: string): Promise<any> {
     return new Promise((resolve, reject) => {
+      let res = [];
       Twitter.get("search/tweets", {
         q: "#" + hashtag,
         count: 100,
@@ -22,12 +23,11 @@ export class TwitterService {
         // until: "2020-01-31"
       })
         .then(function(result: any) {
-          //   console.log(result.data.statuses);
           result.data.statuses.forEach(element => {
-            if (element.geo)
-              console.log(element.user.name, element.geo.coordinates);
+            const date = new Date(element.created_at).getDate();
+            if (date === new Date().getDate()) res.push(element);
           });
-          resolve(result.data.statuses);
+          resolve(res);
         })
         .catch(e => {
           console.error(e);

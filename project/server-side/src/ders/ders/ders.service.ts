@@ -110,6 +110,7 @@ export class DersService {
           const hocaId = [result.rows[0].ders_hoca_id];
           this.hocaSer.getHocaById(hocaId).then(res => {
             result.rows[0].ders_hoca = res[0];
+            console.log("asdadad", result.rows[0]);
             return resolve(result.rows);
           });
         })
