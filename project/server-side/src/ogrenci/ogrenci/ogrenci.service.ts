@@ -13,6 +13,11 @@ export class OgrenciService {
     @Inject(forwardRef(() => DersService)) private dersSer: DersService,
     @Inject(forwardRef(() => TwitterService)) private twitterSer: TwitterService
   ) {}
+  async findeOne(username: string): Promise<any | undefined> {
+    return this.findAll().then(result =>
+      result.find(user => user.ogr_username === username)
+    );
+  }
   insertStudent(newOgrenci: Ogrenci): Promise<any> {
     return new Promise((resolve, reject) => {
       this.twitterSer

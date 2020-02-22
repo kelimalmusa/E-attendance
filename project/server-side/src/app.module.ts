@@ -10,6 +10,7 @@ import { TweetModule } from "./tweet/tweet.module";
 import { TwitterModule } from "./twitter/twitter.module";
 import { DevamsizlikModule } from "./devamsizlik/devamsizlik.module";
 import { YoklamaModule } from "./yoklama/yoklama.module";
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { YoklamaModule } from "./yoklama/yoklama.module";
     TwitterModule,
     DevamsizlikModule,
     YoklamaModule,
-    DersModule
+    DersModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService]

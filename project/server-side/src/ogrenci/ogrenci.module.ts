@@ -16,6 +16,7 @@ import { TwitterService } from "src/twitter/twitter/twitter.service";
     TwitterService
   ],
   imports: [DatabaseModule],
-  controllers: [OgrenciController]
+  controllers: [OgrenciController],
+  exports: [OgrenciService]
 })
 export class OgrenciModule {}

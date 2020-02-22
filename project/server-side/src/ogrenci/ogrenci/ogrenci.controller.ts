@@ -6,13 +6,15 @@ import {
   Param,
   Delete,
   Post,
-  Body
+  Body,
+  UseGuards
 } from "@nestjs/common";
 import { OgrenciService } from "./ogrenci.service";
 import { Response } from "express";
 import { ResultPackage } from "src/common/result-package";
 import * as lodash from "lodash";
 import { Ogrenci } from "src/models/models";
+import { JwtAuthGuard } from "src/auth/auth/jwt-auth.guard";
 @Controller("ogrenci")
 export class OgrenciController {
   constructor(private ogrs: OgrenciService) {}
@@ -20,6 +22,17 @@ export class OgrenciController {
   getOgrenci(@Res() res: Response) {
     this.ogrs
       .findAll()
+      .then(data => {
+        res.status(HttpStatus.OK).json(ResultPackage.success(data));
+      })
+      .catch(() =>
+        res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed())
+      );
+  }
+  @Get("deneme/:username")
+  getOgrenciDeneme(@Res() res: Response, @Param("username") username: string) {
+    this.ogrs
+      .findeOne(username)
       .then(data => {
         res.status(HttpStatus.OK).json(ResultPackage.success(data));
       })
