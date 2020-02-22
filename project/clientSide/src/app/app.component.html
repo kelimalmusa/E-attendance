@@ -325,9 +325,10 @@
 </div>
 
 <div class="content" role="main">
-  First name: <input type="text" #hashtag><br>
-  Last name: <input type="text" #number><br>
-  <button (click)="save(hashtag.value,number.value)">burayabas</button>
+  First name: <input type="text" #username><br>
+  Last name: <input type="text" #password><br>
+  <button (click)="login(username.value,password.value)">burayabas</button>
+  <button (click)="save(username.value,password.value)">getir</button>
   <!-- Highlight Card -->
   <div class="card highlight-card card-small">
 
