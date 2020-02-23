@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatDialogRef, MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-ahmet",
@@ -7,10 +7,16 @@ import { MatDialogRef } from "@angular/material/dialog";
   styleUrls: ["./ahmet.component.css"]
 })
 export class AhmetComponent implements OnInit {
-  constructor(private dialog: MatDialogRef<AhmetComponent>) {}
+  constructor(
+    private dialog: MatDialogRef<AhmetComponent>,
+    private dg: MatDialog
+  ) {}
 
   ngOnInit() {}
   close() {
     this.dialog.close();
+  }
+  ac() {
+    this.dg.open(AhmetComponent, {});
   }
 }

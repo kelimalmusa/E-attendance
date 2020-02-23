@@ -31,8 +31,8 @@ export class AppComponent {
       console.log("sonuc,", asd);
     });
   }
-  login(usernam: string, password: number) {
-    const user = { username: usernam, password: password };
+  login(usernam: string, passwor: number) {
+    const user = { username: usernam, password: passwor };
     this.http.post("http://localhost:3001/auth/login/", user).subscribe(asd => {
       console.log("sonuc,", asd);
       this.token = asd;
