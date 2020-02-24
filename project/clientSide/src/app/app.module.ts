@@ -1,27 +1,24 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { Deneme } from "./deneme/deneme";
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { HttpClientModule } from "@angular/common/http";
-import { MatDialogModule } from "@angular/material/dialog";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AhmetComponent } from "./ahmet/ahmet.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MaterialModule } from "./material/material.module";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [AppComponent, AhmetComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    MatDialogModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MaterialModule,
     FlexLayoutModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [AhmetComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
