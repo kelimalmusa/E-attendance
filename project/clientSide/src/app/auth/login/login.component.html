@@ -1,0 +1,17 @@
+<h1 fxLayoutAlign="center center">Login Formu</h1>
+<mat-form-field   class="example-full-width" >
+  <mat-label>Kullanıcı Adı Giriniz</mat-label>
+  <input [(ngModel)]="username"  matInput placeholder="Ex. It makes me feel..." >
+</mat-form-field>
+<mat-form-field class="example-full-width">
+  <mat-label >Şifre Giriniz</mat-label>
+  <input matInput type="password" [(ngModel)]="password" placeholder="Ex. It makes me feel...">
+</mat-form-field>
+<div class="div" fxLayout="row" fxLayoutGap="100px">
+<button fxFlex mat-raised-button class="button"  (click)="login()">login</button>
+<button fxFlex mat-raised-button class="button"  (click)="close()">Vazgeç</button>
+</div>
+
+
+<button class="unuttum"  mat-button color="accent" (click)="unut()">Şifremi Unuttum </button>
+

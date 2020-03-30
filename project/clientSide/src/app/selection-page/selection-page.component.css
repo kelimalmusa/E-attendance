@@ -1,0 +1,73 @@
+mat-grid-tile {
+  background-color: aquamarine;
+}
+
+.yoklamaal {
+  background: url("../../assets/twitter.jpg") no-repeat;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+}
+
+.dönemlikders {
+  background: url("../../assets/dersiş.jpg") no-repeat;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+}
+.devamsızlık{
+  background: url("../../assets/doc.jpg") no-repeat;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+}
+.btnYoklama {
+  position: absolute;
+  bottom: 80px;
+  width: 300px;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  border: 8px solid rgb(13, 235, 224);
+  height: 50px;
+  background: none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btnDers{
+  position: absolute;
+  bottom: 160px;
+  width: 500px;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  border: 8px solid rgb(255, 174, 0);
+  height: 50px;
+  background: none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+
+
+}
+
+.btnDevam{
+
+  position: absolute;
+  left: 180px;
+  bottom: 50px;
+  width: 300px;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  border: 8px solid whitesmoke;
+  height: 50px;
+  background: none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+
+
+}

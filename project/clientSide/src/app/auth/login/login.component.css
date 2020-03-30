@@ -1,0 +1,47 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+
+
+  width: 100%;
+
+}
+
+.example-full-width {
+  width: 100%;
+  background-color: black;
+  color: rgba(123, 216, 29, 0.952);
+  appearance: none;
+}
+
+.example-full-width mat-label{
+
+  color: rgba(123, 216, 29, 0.952);
+}
+
+::placeholder {
+  color:rgb(233, 5, 119);
+}
+.div {
+
+  background-color: black;
+}
+
+.div button {
+  background-color: rgba(123, 216, 29, 0.952);
+}
+
+.button {
+  background-color: black;
+  margin: 50px;
+}
+
+.unuttum {
+  margin-left: 35%;
+}
+
+button:hover {
+  text-decoration: underline;
+  color: crimson;
+  background-color: cyan;
+}

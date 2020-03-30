@@ -1,0 +1,52 @@
+/*mat-grid-tile{
+  background-color: aquamarine;
+
+}*/
+/*.container{
+  border: 1px solid red;
+  min-height: 500px
+}
+.cizgi{min-width: 100%;}
+.sol{border: 1px solid green;
+ }
+.sag{border: 1px solid blue;}
+.orta{border: 1px solid palevioletred;}*/
+
+mat-grid-tile{
+  background-color: aquamarine;
+}
+
+
+.ogrenci{
+
+  background: url("../../assets/leaf.jpg") no-repeat;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+
+}
+
+.hoca{
+  background: url("../../assets/leaf2.jpg") no-repeat;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+
+}
+
+
+.textbox input{
+
+  width: 200px;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  margin: 8px 0;
+  border: 8px solid #4caf50;
+  height: 50px ;
+  background:none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+
+}

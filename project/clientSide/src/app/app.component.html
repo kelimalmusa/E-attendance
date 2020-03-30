@@ -346,9 +346,13 @@
 
   </div>
 
-  <!-- Resources -->
+  <!-- Resources      nasssssssssssssssssssssssssss burdasın -->
   <h2>Resources</h2>
-  <button mat-raised-button color="primary" (click)="ahmet()">Ahmet</button>
+  <div fxLayout="column" fxLayoutGap="15px">
+  <button fxFlex mat-raised-button color="primary" (click)="ahmet()">Ahmet</button>
+  <button fxFlex mat-raised-button color="primary" (click)="openLogin()">Login</button>
+  <button fxFlex mat-raised-button color="accent" (click)="openOpen()">open</button>
+</div>
   <p>Here are some links to help you get started:</p>
 
   <div class="card-container">
@@ -600,5 +604,5 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-
+<button mat-raised-button color="warn" (click)="openloginn()">Loginnnnnn</button>
 <router-outlet></router-outlet>

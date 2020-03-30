@@ -1,0 +1,67 @@
+<html>
+  <body>
+    <div fxLayout="column" class="login-box">
+      <h1 fxFlex fxLayoutAlign="center">Sign-Up</h1>
+
+     <div class="textbox">
+        <!-- <i class="fas fa-lock" aria-hidden="true">-->
+        <input
+          type="text"
+          [(ngModel)]="name"
+          placeholder="Name"
+          name=""
+          value=""
+        />
+      </div>
+      <div  class="textbox">
+        <!-- <i class="fas fa-user" aria-hidden="true"></i>-->
+        <input
+          type="text"
+          [(ngModel)]="surname"
+          placeholder="Surname"
+          name=""
+          value=""
+        />
+      </div>
+
+      <div  class="textbox">
+        <!-- <i class="fas fa-user" aria-hidden="true"></i>-->
+        <input
+          type="text"
+          [(ngModel)]="username"
+          placeholder="Username"
+          name=""
+          value=""
+        />
+      </div>
+      <div  class="textbox">
+        <!-- <i class="fas fa-user" aria-hidden="true"></i>-->
+        <input
+          type="text"
+          [(ngModel)]="password"
+          placeholder="Password"
+          name=""
+          value=""
+        />
+      </div>
+      <div  class="textbox">
+        <!-- <i class="fas fa-user" aria-hidden="true"></i>-->
+        <input
+          type="text"
+          [(ngModel)]="email"
+          placeholder="Email"
+          name=""
+          value=""
+        />
+      </div>
+      <input
+        (click)="signUp()"
+        class="btn"
+        type="button"
+        name=""
+        value="Sign-up"
+      />
+    </div>
+  </body>
+</html>
+
