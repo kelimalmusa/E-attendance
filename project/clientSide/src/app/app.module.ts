@@ -16,8 +16,17 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { SelectionPageComponent } from "./selection-page/selection-page.component";
 import { LoginhocaComponent } from "./loginhoca/loginhoca.component";
 import { SignuphocaComponent } from "./signuphoca/signuphoca.component";
+<<<<<<< HEAD
 import { SelectionpagehocaComponent } from './selectionpagehoca/selectionpagehoca.component';
+=======
+import { Routes, RouterModule } from "@angular/router";
+import { MainComponent } from "./main/main.component";
+>>>>>>> 5ff4365a371fe3be6923ca310462b39277951328
 
+const routes: Routes = [
+  { path: "dashboard", component: LoginnComponent },
+  { path: "", component: MainComponent }
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +47,7 @@ import { SelectionpagehocaComponent } from './selectionpagehoca/selectionpagehoc
     BrowserAnimationsModule,
     MatDialogModule,
     MaterialModule,
+    RouterModule.forRoot(routes, { enableTracing: true }),
     FlexLayoutModule,
     MatGridListModule,
     ReactiveFormsModule,
