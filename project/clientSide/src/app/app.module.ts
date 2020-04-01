@@ -8,14 +8,15 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MaterialModule } from "./material/material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from "./auth/login/login.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, FormControl, FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { OpenComponent } from "./open/open.component";
 import { LoginnComponent } from "./loginn/loginn.component";
 import { SignupComponent } from "./signup/signup.component";
 import { MatGridListModule } from "@angular/material/grid-list";
-import { SelectionPageComponent } from './selection-page/selection-page.component';
-import { LoginhocaComponent } from './loginhoca/loginhoca.component';
-import { SignuphocaComponent } from './signuphoca/signuphoca.component';
+import { SelectionPageComponent } from "./selection-page/selection-page.component";
+import { LoginhocaComponent } from "./loginhoca/loginhoca.component";
+import { SignuphocaComponent } from "./signuphoca/signuphoca.component";
+import { SelectionpagehocaComponent } from './selectionpagehoca/selectionpagehoca.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SignuphocaComponent } from './signuphoca/signuphoca.component';
     SignupComponent,
     SelectionPageComponent,
     LoginhocaComponent,
-    SignuphocaComponent
+    SignuphocaComponent,
+    SelectionpagehocaComponent
   ],
   imports: [
     FormsModule,
@@ -37,7 +39,8 @@ import { SignuphocaComponent } from './signuphoca/signuphoca.component';
     MatDialogModule,
     MaterialModule,
     FlexLayoutModule,
-    MatGridListModule
+    MatGridListModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

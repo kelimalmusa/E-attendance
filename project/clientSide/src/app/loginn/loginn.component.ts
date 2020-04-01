@@ -2,6 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { SignupComponent } from "../signup/signup.component";
 import { MatDialog } from "@angular/material/dialog";
 import { SelectionPageComponent } from "../selection-page/selection-page.component";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormControl
+} from "@angular/forms";
 // import "https:// stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 /* bu import doğru mu bana istediğimi sağlar mı */
 
@@ -11,7 +18,20 @@ import { SelectionPageComponent } from "../selection-page/selection-page.compone
   styleUrls: ["./loginn.component.css"]
 })
 export class LoginnComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
+  loginForm: FormGroup;
+  constructor(private dialog: MatDialog, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      username: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(15)
+      ]),
+      password: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(5)
+      ])
+    });
+  }
 
   username: string;
   password: string;
@@ -21,6 +41,7 @@ export class LoginnComponent implements OnInit {
   login() {
     console.log("Girdiğiniz kullanıcı adı: ", this.username);
     console.log("girdiğiniz password", this.password);
+    this.loginForm.reset();
   }
 
   openSignUp() {

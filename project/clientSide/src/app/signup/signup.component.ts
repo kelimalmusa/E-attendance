@@ -1,4 +1,13 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { LoginnComponent } from "../loginn/loginn.component";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormControl
+} from "@angular/forms";
 
 @Component({
   selector: "app-signup",
@@ -6,7 +15,45 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./signup.component.css"]
 })
 export class SignupComponent implements OnInit {
-  constructor() {}
+  loginForm: FormGroup;
+  constructor(private dialog: MatDialog, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      username: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(15)
+      ]),
+      password: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(5)
+      ]),
+      ogrno: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(12)
+      ]),
+      ogrenimturu: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(15)
+      ]),
+      email: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+        Validators.email
+      ]),
+      name: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(30)
+      ]),
+      surname: this.fb.control("", [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(30)
+      ])
+    });
+  }
 
   ogrno: string;
   name: string;
@@ -26,5 +73,13 @@ export class SignupComponent implements OnInit {
     console.log("Girdiğiniz kullanıcı adı: ", this.username);
     console.log("girdiğiniz password", this.password);
     console.log("girdiğiniz email : ", this.email);
+    this.loginForm.reset();
+  }
+
+  openloginn() {
+    this.dialog.open(LoginnComponent, {
+      width: "2700px",
+      height: "1500px"
+    });
   }
 }

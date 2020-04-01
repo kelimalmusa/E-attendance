@@ -2,10 +2,12 @@
   <body>
     <div fxLayout="column" class="login-box">
       <h1 fxFlex fxLayoutAlign="center">Sign-Up</h1>
+      <form fxFlex [formGroup]="loginForm">
 
      <div class="textbox">
         <!-- <i class="fas fa-lock" aria-hidden="true">-->
         <input
+        formControlName="name"
           type="text"
           [(ngModel)]="name"
           placeholder="Name"
@@ -16,6 +18,7 @@
       <div  class="textbox">
         <!-- <i class="fas fa-user" aria-hidden="true"></i>-->
         <input
+        formControlName="surname"
           type="text"
           [(ngModel)]="surname"
           placeholder="Surname"
@@ -27,6 +30,7 @@
       <div  class="textbox">
         <!-- <i class="fas fa-user" aria-hidden="true"></i>-->
         <input
+        formControlName="username"
           type="text"
           [(ngModel)]="username"
           placeholder="Username"
@@ -37,6 +41,7 @@
       <div  class="textbox">
         <!-- <i class="fas fa-user" aria-hidden="true"></i>-->
         <input
+        formControlName="password"
           type="text"
           [(ngModel)]="password"
           placeholder="Password"
@@ -47,6 +52,7 @@
       <div  class="textbox">
         <!-- <i class="fas fa-user" aria-hidden="true"></i>-->
         <input
+        formControlName="email"
           type="text"
           [(ngModel)]="email"
           placeholder="Email"
@@ -54,12 +60,15 @@
           value=""
         />
       </div>
+    </form>
       <input
         (click)="signUp()"
+        (click)="openloginHoca()"
         class="btn"
         type="button"
         name=""
         value="Sign-up"
+        [disabled]="loginForm.invalid"
       />
     </div>
   </body>

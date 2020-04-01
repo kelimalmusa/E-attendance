@@ -1,13 +1,7 @@
 <mat-grid-list cols="2" rowHeight="50%" gutterSize="10px">
-  <mat-grid-tile class="yoklamaal">
+  <mat-grid-tile class="devamdurum">
     <div fxLayout="column" fxLayoutAlign="end center">
-      <button
-        onclick="window.location.href = 'https://twitter.com';"
-        target="_blank"
-        class="btnYoklama"
-      >
-        Yoklama katıl
-      </button>
+      <input class="btnDurum" type="button" value="Öğrenci-Devamszılık Durumu" />
     </div>
   </mat-grid-tile>
   <mat-grid-tile class="dönemlikders" rowspan="2">
@@ -15,9 +9,10 @@
       <input class="btnDers" type="button" value="Dönemlik-Ders İşlemleri" />
     </div>
   </mat-grid-tile>
-  <mat-grid-tile class="devamsızlık">
-    <div fxLayout="column" fxLayoutAlign="end none">
-      <input class="btnDevam" type="button" value="Devamsızlık Bilgisi" />
+  <mat-grid-tile class="devamislem">
+    <div fxLayout="column" fxLayoutAlign="end center">
+      <input class="btnislem" type="button" value="Öğrenci-Devamszılık-İşlemleri" />
     </div>
   </mat-grid-tile>
 </mat-grid-list>
+
