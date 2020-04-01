@@ -1,0 +1,84 @@
+Uygulamamız yapısı ve çalışması itibariyle iki şahsı muhataba alır 
+1.Öğrenci  ve 2.Hoca dır .Bundan dolayı uygulamayı ziyeret eden kişinin karşısına çıkacak olan kimlik seçiminin yapıldığı
+Open sayfamızdır .
+********Open sayfası için yapılanlar ***********
+-Angularda Open componentimiz oluşturuldu (Open.ts ,Open.html, Open.css , Open.spec.ts)
+-Open.ts--> ile gerekli kodlamalar ve yönlendirmeler gerçekleştiridi
+-Open.html--> ile gerekli ana tasarım yapıldı ve kodları yazıldı
+-Open.css --> ile de gerekli css kodlamarı ve tasaramın yükseltilmesi için gerekli css kodlaması yapıldı 
+-----------------------------------------------------------------------------------------------------------------------------
+Kimlik seçimi sonrası gidilmesi gereken sayfa yapısı kişinin sisteme giriş yapacağı login sayfasıdır .Eğer ki yeni bir 
+öğrenci ise (ilk defa okula kayıt yaptıran ,okulu yeni kazanan veyahut geçis yapan vs) sisteme bir defalık ana kayıt için 
+gideceği SignUp sayfasıdır 
+Öğrenci ve Hoca için signUp sayfları değişiklik göstermektedir Çünkü sisteme kayıt yapabilmeleri için gerekli bilgiler 
+ve alanlar farklıdır.Dolayısıyla Login ve SignUp sayfları Öğrenci için ve Hoca için ayrı olarak oluşturulup kodlanmıştır 
+
+*********Login sayfası için yapılanalar***********(Öğrenci için )
+-Angularda Loginn componentimiz oluşturuldu (Loginn.ts ,Loginn.html, Loginn.css , Loginn.spec.ts)
+-Loginn.ts--> ile gerekli kodlamalar ve yönlendirmeler gerçekleştiridi
+-Loginn.html--> ile gerekli ana tasarım yapıldı ve kodları yazıldı
+-Loginn.css --> ile de gerekli css kodlamarı ve tasaramın yükseltilmesi için gerekli css kodlaması yapıldı 
+-----------------------------------------------------------------------------------------------------------------------------
+**********SignUp sayfası için yapılanlar **********(Öğrenci için)
+-Angularda signup componentimiz oluşturuldu (signup.ts ,signup.html, signup.css , signup.spec.ts)
+-signup.ts--> ile gerekli kodlamalar ve yönlendirmeler gerçekleştiridi
+-signup.html--> ile gerekli ana tasarım yapıldı ve kodları yazıldı
+-signup.css --> ile de gerekli css kodlamarı ve tasaramın yükseltilmesi için gerekli css kodlaması yapıldı 
+------------------------------------------------------------------------------------------------------------------------------
+**********Login sayfası için yapılanlar **********(Hoca için)
+-Angularda loginhoca componentimiz oluşturuldu (loginhoca.ts ,loginhoca.html, loginhoca.css , loginhoca.spec.ts)
+-loginhoca.ts--> ile gerekli kodlamalar ve yönlendirmeler gerçekleştiridi
+-loginhoca.html--> ile gerekli ana tasarım yapıldı ve kodları yazıldı
+-loginhoca.css --> ile de gerekli css kodlamarı ve tasaramın yükseltilmesi için gerekli css kodlaması yapıldı 
+------------------------------------------------------------------------------------------------------------------------------
+**********SignUp sayfası için yapılanlar **********(Hoca için)
+-Angularda signuphoca componentimiz oluşturuldu (signuphoca.ts ,signuphoca.html, signuphoca.css , signuphoca.spec.ts)
+-signuphoca.ts--> ile gerekli kodlamalar ve yönlendirmeler gerçekleştiridi
+-signuphoca.html--> ile gerekli ana tasarım yapıldı ve kodları yazıldı
+-signuphoca.css --> ile de gerekli css kodlamarı ve tasaramın yükseltilmesi için gerekli css kodlaması yapıldı 
+------------------------------------------------------------------------------------------------------------------------------
+Kaydını geçkeleştirmiş ve sistemimize login yapmış kimse için sistemimizin sunduğu hizmetlerin seçiminin yapılacağı 
+SelectionPage  sayfası  karşılarına çıkar.Keza bu sayfamız da Hoca ve Öğrenci için ayrı olarak oluşturulup kodalanmıştır 
+Sebebi ise gerçekleştirebilecekleri işlmeleri farklıdır .Misal Öğrenci yoklamaya katılabilirken Hoca katılamaz,Hoca öğrenci 
+devamsızlık durumu üzerinde işlem yaparken,öğrenciye  katiyetle öyle bir hizmet sunulmaz ve bunun gibi farklı işlemler 
+silsilesini bulundurur.
+
+*************SelectionPage sayfası için yapılanlar **********(öğrenci için )
+içerisinde 3 hizmet sunuldu dolayısyla bu sayfa 3 bölüme ayrıldı ...
+Hizmetler ise 
+1-)Yoklamaya katıl (öğrenci burdan Twitter'a yönlendirilir ki yoklamaya katılıp tweet atabilmesi için)
+Dipnot***(Önemli):Twitter'giriş sistemizin içerisinden gerçekleştirlir yani twitter'a girmek için önce sisteme login 
+yapılması gerekir (sebebi güvenlik ve sistem açığının engellenmesi ,daha sonra işleyişi anlatılacaktır ....)
+(gerçekleştirildi yönlendirme yapıldı )
+
+2-)Ders-Dönem İşlemleri(ayrı bir sayfa olarak ele alınacak ve ilerleyen zamanalarda  kodlanacak...)
+
+3-)Devamsızlık-Durumu Bilgisi(ayrı bir sayfa olarak ele alınacak ve ilerleyen zamanalarda kodlanacak...)
+
+-Angularda selectionpage componentimiz oluşturuldu (selectionpage.ts ,selectionpage.html, selectionpage.css , selectionpage.spec.ts)
+-selectionpage.ts--> ile gerekli kodlamalar ve yönlendirmeler gerçekleştiridi
+-selectionpage.html--> ile gerekli ana tasarım yapıldı ve kodları yazıldı
+-selectionpage.css --> ile de gerekli css kodlamarı ve tasaramın yükseltilmesi için gerekli css kodlaması yapıldı
+------------------------------------------------------------------------------------------------------------------------------------
+*************SelectionPage sayfası için yapılanlar **********(Hoca için  )
+içerisinde 3 hizmet sunuldu dolayısyla bu sayfa 3 bölüme ayrıldı ...
+Hizmetler ise 
+1-)Öğrenci-Devamsızlık Durumu Verileri(ayrı bir sayfa olarak ele alınacak ve ilerleyen zamanalarda  kodlanacak...)
+
+2-)Ders-Dönem İşlemleri(ayrı bir sayfa olarak ele alınacak ve ilerleyen zamanalarda  kodlanacak...)
+
+3-)Öğrenci-Devamsızlık İşlemleri (ayrı bir sayfa olarak ele alınacak ve ilerleyen zamanalarda kodlanacak...)
+
+-Angularda selectionpagehoca componentimiz oluşturuldu (selectionpagehoca.ts ,selectionpagehoca.html, selectionpagehoca.css , selectionpagehoca.spec.ts)
+-selectionpagehoca.ts--> ile gerekli kodlamalar ve yönlendirmeler gerçekleştiridi
+-selectionpagehoca.html--> ile gerekli ana tasarım yapıldı ve kodları yazıldı
+-selectionpagehoca.css --> ile de gerekli css kodlamarı ve tasaramın yükseltilmesi için gerekli css kodlaması yapıldı
+
+
+
+
+
+
+
+
+
