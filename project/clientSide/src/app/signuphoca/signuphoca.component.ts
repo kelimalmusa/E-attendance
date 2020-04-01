@@ -6,9 +6,7 @@ import {
   FormControl,
   Validators
 } from "@angular/forms";
-import { MatDialog } from '@angular/material/dialog';
-import { LoginhocaComponent } from '../loginhoca/loginhoca.component';
-
+import { MatDialog } from "@angular/material/dialog";
 @Component({
   selector: "app-signuphoca",
   templateUrl: "./signuphoca.component.html",
@@ -16,7 +14,7 @@ import { LoginhocaComponent } from '../loginhoca/loginhoca.component';
 })
 export class SignuphocaComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private dialog: MatDialog,private fb: FormBuilder) {
+  constructor(private dialog: MatDialog, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: this.fb.control("", [
         Validators.required,
@@ -63,11 +61,5 @@ export class SignuphocaComponent implements OnInit {
     console.log("girdiğiniz password", this.password);
     console.log("girdiğiniz email : ", this.email);
     this.loginForm.reset();
-  }
-  openloginHoca() {
-    this.dialog.open(LoginhocaComponent, {
-      width: "2700px",
-      height: "1500px"
-    });
   }
 }

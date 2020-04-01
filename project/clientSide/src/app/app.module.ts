@@ -8,7 +8,12 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MaterialModule } from "./material/material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from "./auth/login/login.component";
-import { FormsModule, FormControl, FormBuilder, ReactiveFormsModule } from "@angular/forms";
+import {
+  FormsModule,
+  FormControl,
+  FormBuilder,
+  ReactiveFormsModule
+} from "@angular/forms";
 import { OpenComponent } from "./open/open.component";
 import { LoginnComponent } from "./loginn/loginn.component";
 import { SignupComponent } from "./signup/signup.component";
@@ -16,16 +21,13 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { SelectionPageComponent } from "./selection-page/selection-page.component";
 import { LoginhocaComponent } from "./loginhoca/loginhoca.component";
 import { SignuphocaComponent } from "./signuphoca/signuphoca.component";
-<<<<<<< HEAD
-import { SelectionpagehocaComponent } from './selectionpagehoca/selectionpagehoca.component';
-=======
+import { SelectionpagehocaComponent } from "./selectionpagehoca/selectionpagehoca.component";
 import { Routes, RouterModule } from "@angular/router";
 import { MainComponent } from "./main/main.component";
->>>>>>> 5ff4365a371fe3be6923ca310462b39277951328
 
 const routes: Routes = [
-  { path: "dashboard", component: LoginnComponent },
-  { path: "", component: MainComponent }
+  { path: "student", component: LoginnComponent },
+  { path: "", component: OpenComponent }
 ];
 @NgModule({
   declarations: [
@@ -50,7 +52,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { enableTracing: true }),
     FlexLayoutModule,
     MatGridListModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { LoginnComponent } from "../loginn/loginn.component";
 import {
   FormBuilder,
   FormGroup,
@@ -76,10 +75,4 @@ export class SignupComponent implements OnInit {
     this.loginForm.reset();
   }
 
-  openloginn() {
-    this.dialog.open(LoginnComponent, {
-      width: "2700px",
-      height: "1500px"
-    });
-  }
 }
