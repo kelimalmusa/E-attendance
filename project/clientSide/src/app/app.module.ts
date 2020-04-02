@@ -27,7 +27,8 @@ import { MainComponent } from "./main/main.component";
 
 const routes: Routes = [
   { path: "student", component: LoginnComponent },
-  { path: "", component: OpenComponent }
+  { path: "", component: OpenComponent },
+  { path: "hoca", component: LoginhocaComponent }
 ];
 @NgModule({
   declarations: [

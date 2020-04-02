@@ -1,29 +1,8 @@
-<!--<div
-  class="container"
-  fxLayout="column "
-  fxLayoutAlign=" center center"
-  fxFill
-
-
-
-
-
-
->
-  <div  class="sol"    >baş kısım</div>
-
-
-
- <div  class="sag"    >son kısım</div>
-
-
-</div> -->
-
 <mat-grid-list cols="1" rowHeight="50%" gutterSize="10px">
   <mat-grid-tile class="ogrenci">
     <div class="textbox">
       <input
-      [routerLink]="['/student']"
+        [routerLink]="['/student']"
         class="btn"
         type="button"
         name=""
@@ -33,20 +12,13 @@
 
   <mat-grid-tile class="hoca">
     <div class="textbox">
-
-        <input
-
-        (click)="openloginHoca()"
+      <input
+        [routerLink]="['/hoca']"
         class="btn"
         type="button"
         name=""
         value="Hoca"
       />
-
     </div>
-
-
-
-
   </mat-grid-tile>
 </mat-grid-list>
