@@ -6,7 +6,7 @@ import {
   Post,
   Body,
   Param,
-  Delete
+  Delete,
 } from "@nestjs/common";
 import { DersService } from "./ders.service";
 import { HocaService } from "src/hoca/hoca/hoca.service";
@@ -21,18 +21,30 @@ export class DersController {
   findAllDers(@Res() res: Response) {
     this.deS
       .findAll()
-      .then(data => {
+      .then((data) => {
         res.status(HttpStatus.OK).json(ResultPackage.success(data));
       })
       .catch(() => {
         res.status(HttpStatus.BAD_REQUEST).json(ResultPackage.failed());
       });
   }
+  @Get("deneme")
+  sayhello() {
+    this.deS
+      .sayHello()
+      .then(() => {
+        console.log("controller");
+        return ResultPackage.success();
+      })
+      .catch(() => {
+        return ResultPackage.failed();
+      });
+  }
   @Post()
   insertNewDers(@Res() res: Response, @Body() body: Ders) {
     this.deS
       .insertNewDers(body)
-      .then(result => {
+      .then((result) => {
         res.status(HttpStatus.OK).json(ResultPackage.success(result.rows));
       })
       .catch(() => {
@@ -43,7 +55,7 @@ export class DersController {
   getDersByCodeOrName(@Res() res: Response, @Param("dersCode") param: string) {
     this.deS
       .findDersByDersCodeOrName(param)
-      .then(result => {
+      .then((result) => {
         res.status(HttpStatus.OK).json(ResultPackage.success(result));
       })
       .catch(() => {
@@ -72,7 +84,7 @@ export class DersController {
   ) {
     this.deS
       .updateDersByDersCode(ders, dersCode)
-      .then(result => {
+      .then((result) => {
         res.status(HttpStatus.OK).json(ResultPackage.success(result.rows));
       })
       .catch(() => {

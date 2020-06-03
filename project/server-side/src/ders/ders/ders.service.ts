@@ -1,10 +1,11 @@
-import { Injectable, Inject, forwardRef } from "@nestjs/common";
+import { Injectable, Inject, forwardRef, Logger } from "@nestjs/common";
 import { DatabaseService } from "src/database/service/database.service";
 import { Ders } from "src/models/models";
 import { QueryResult } from "pg";
 import { HocaService } from "src/hoca/hoca/hoca.service";
 import * as lodash from "lodash";
 import { promises } from "dns";
+import { rejects } from "assert";
 
 @Injectable()
 export class DersService {
@@ -29,15 +30,15 @@ export class DersService {
             newDers.ders_uygulama,
             newDers.ders_baslangic_saat,
             newDers.ders_hoca_id,
-            newDers.ders_salon
+            newDers.ders_salon,
           ]
         )
-        .then(result => {
+        .then((result) => {
           if (!result || !result.rowCount) return reject();
           console.dir(result);
           return resolve(result);
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           reject();
         });
@@ -58,14 +59,14 @@ export class DersService {
             ders.ders_baslangic_saat,
             ders.ders_hoca_id,
             ders.ders_salon,
-            dersCode
+            dersCode,
           ]
         )
-        .then(result => {
+        .then((result) => {
           if (!result) return reject();
           resolve(result);
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           reject();
         });
@@ -73,15 +74,18 @@ export class DersService {
   }
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
+      if (this.dbs.getPool()) console.log("pooool var");
+      else console.log("poool yok");
+
       this.dbs
         .getPool()
         .query("select * from ders")
-        .then(result => {
+        .then((result) => {
           if (!result || !result.rowCount) return reject();
-          const hocaIdList = result.rows.map(i => i.ders_hoca_id);
-          this.hocaSer.getHocaById(hocaIdList).then(hocaRequest => {
+          const hocaIdList = result.rows.map((i) => i.ders_hoca_id);
+          this.hocaSer.getHocaById(hocaIdList).then((hocaRequest) => {
             const hocaList = lodash.groupBy(hocaRequest, "hoca_id");
-            result.rows.forEach(element => {
+            result.rows.forEach((element) => {
               if (hocaList) {
                 element.ders_hoca = hocaList[element.ders_hoca_id][0];
               }
@@ -89,9 +93,24 @@ export class DersService {
             resolve(result.rows);
           });
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           reject();
+        });
+    });
+  }
+  sayHello() {
+    return new Promise((resolve, reject) => {
+      this.dbs
+        .getPool()
+        .query("select * from ders")
+        .then((result) => {
+          if (!result) return reject();
+          return resolve();
+        })
+        .catch((e) => {
+          console.log("Service",e);
+          return reject(e);
         });
     });
   }
@@ -105,18 +124,18 @@ export class DersService {
           "select * from ders where (ders_code ilike $1 or ders_name ilike $1) and ders_sube=$2",
           ["%" + hashtag[1] + "%", hashtag[2]]
         )
-        .then(result => {
+        .then((result) => {
           if (!result) return reject();
           if (!result.rowCount)
             return resolve("Girilen kriterlere göre veri bulunamadı");
           const hocaId = [result.rows[0].ders_hoca_id];
-          this.hocaSer.getHocaById(hocaId).then(res => {
+          this.hocaSer.getHocaById(hocaId).then((res) => {
             result.rows[0].ders_hoca = res[0];
             console.log("asdadad", result.rows[0]);
             return resolve(result.rows);
           });
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           reject();
         });
@@ -127,14 +146,14 @@ export class DersService {
       this.dbs
         .getPool()
         .query("delete from ders where ders_code=$1", [dersCode])
-        .then(result => {
+        .then((result) => {
           if (!result || !result.rowCount) {
             return reject();
           }
           console.dir(result);
           resolve(result);
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           reject();
         });
@@ -149,11 +168,11 @@ export class DersService {
           `select * from ders where ders_hoca_id in (${dollars})`,
           hocaIdList
         )
-        .then(result => {
+        .then((result) => {
           if (!result) return reject();
           resolve(result.rows);
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           reject();
         });
@@ -166,11 +185,11 @@ export class DersService {
         this.dbs
           .getPool()
           .query(`select * from ders where ders_id in (${dollars})`, dersId)
-          .then(result => {
+          .then((result) => {
             if (!result) return reject();
             resolve(result.rows);
           })
-          .catch(e => {
+          .catch((e) => {
             console.error(e);
             reject();
           });
@@ -185,11 +204,11 @@ export class DersService {
         .query(
           `select ders_id from ogrenci_kayit where ogrenci_id in(${dollars})`
         )
-        .then(result => {
+        .then((result) => {
           if (!result) return reject();
           resolve(result.rows);
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           reject();
         });
@@ -204,17 +223,17 @@ export class DersService {
           `select * from ders inner join ogrenci_kayit on ogrenci_kayit.ogr_id in (${dollars}) and ogrenci_kayit.ders_id=ders.ders_id`,
           ogrenciIdList
         )
-        .then(result => {
+        .then((result) => {
           if (!result) return reject();
-          const hocaIdList = result.rows.map(i => i.ders_hoca_id);
-          this.hocaSer.getHocaById(hocaIdList).then(result2 => {
+          const hocaIdList = result.rows.map((i) => i.ders_hoca_id);
+          this.hocaSer.getHocaById(hocaIdList).then((result2) => {
             if (!result2) return reject();
             const hocaList = lodash.groupBy(result2, "hoca_id");
-            result.rows.forEach(e => (e.hoca = hocaList[e.ders_hoca_id]));
+            result.rows.forEach((e) => (e.hoca = hocaList[e.ders_hoca_id]));
             return resolve(result);
           });
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           reject();
         });

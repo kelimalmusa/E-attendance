@@ -18,7 +18,7 @@ import { JwtAuthGuard } from "src/auth/auth/jwt-auth.guard";
 @Controller("ogrenci")
 export class OgrenciController {
   constructor(private ogrs: OgrenciService) {}
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   getOgrenci(@Res() res: Response) {
     this.ogrs
