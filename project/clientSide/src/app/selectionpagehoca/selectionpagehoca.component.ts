@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { HocadonemdersComponent } from "../hocadonemders/hocadonemders.component";
 
 @Component({
   selector: "app-selectionpagehoca",

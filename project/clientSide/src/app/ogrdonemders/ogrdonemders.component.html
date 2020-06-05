@@ -1,0 +1,104 @@
+<mat-grid-list cols="2" rowHeight="100%" gutterSize="10px">
+  <mat-grid-tile class="left" fxLayout="column" fxLayoutAlign="start start">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [aria-label]="checkboxLabel()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+
+      <!-- Code Column -->
+      <ng-container matColumnDef="derscode">
+        <th mat-header-cell *matHeaderCellDef>Ders Code</th>
+        <td mat-cell *matCellDef="let element">{{ element.derscode }}</td>
+      </ng-container>
+
+      <!-- dersname column -->
+      <ng-container matColumnDef="dersname">
+        <th mat-header-cell *matHeaderCellDef>Ders Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.dersname }}</td>
+      </ng-container>
+
+      <!-- dershoca column -->
+      <ng-container matColumnDef="dershoca">
+        <th mat-header-cell *matHeaderCellDef>Ders Hoca</th>
+        <td mat-cell *matCellDef="let element">{{ element.dershoca }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns2"
+        (click)="selection.toggle(row)"
+      ></tr>
+    </table>
+
+    <button class="btn" (click)="update()">Update</button>
+  </mat-grid-tile>
+
+  <mat-grid-tile class="right">
+    <table mat-table [dataSource]="ahmet" class="mat-elevation-z8">
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+
+      <!-- derscode column -->
+      <ng-container matColumnDef="derscode">
+        <th mat-header-cell *matHeaderCellDef>Ders Code</th>
+        <td mat-cell *matCellDef="let element">{{ element.derscode }}</td>
+      </ng-container>
+
+      <!-- dersnamecolumn -->
+      <ng-container matColumnDef="dersname">
+        <th mat-header-cell *matHeaderCellDef>Ders Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.dersname }}</td>
+      </ng-container>
+
+      <!-- dershoca column -->
+      <ng-container matColumnDef="dershoca">
+        <th mat-header-cell *matHeaderCellDef>Ders Hoca</th>
+        <td mat-cell *matCellDef="let element">{{ element.dershoca }}</td>
+      </ng-container>
+      <ng-container matColumnDef="islem">
+        <th mat-header-cell *matHeaderCellDef>islem</th>
+        <td mat-cell *matCellDef="let element"><button (click)="deleteDers(element)">delete</button> </td>
+      </ng-container>
+
+      <!--<ng-container   burayı delete için yapmak istemiştim olmadı >
+        <td><button class="btndelete" click="delete()">Delete</button></td>
+      </ng-container>-->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsss"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsss"></tr>
+    </table>
+
+    <button class="btn" (click)="sub()">Submit</button>
+  </mat-grid-tile>
+</mat-grid-list>
