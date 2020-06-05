@@ -12,7 +12,7 @@ import {
   FormsModule,
   FormControl,
   FormBuilder,
-  ReactiveFormsModule
+  ReactiveFormsModule,
 } from "@angular/forms";
 import { OpenComponent } from "./open/open.component";
 import { LoginnComponent } from "./loginn/loginn.component";
@@ -24,11 +24,17 @@ import { SignuphocaComponent } from "./signuphoca/signuphoca.component";
 import { SelectionpagehocaComponent } from "./selectionpagehoca/selectionpagehoca.component";
 import { Routes, RouterModule } from "@angular/router";
 import { MainComponent } from "./main/main.component";
+import { OgrdonemdersComponent } from "./ogrdonemders/ogrdonemders.component";
+import { HocadonemdersComponent } from "./hocadonemders/hocadonemders.component";
 
 const routes: Routes = [
   { path: "student", component: LoginnComponent },
   { path: "", component: OpenComponent },
-  { path: "hoca", component: LoginhocaComponent }
+  { path: "home", component: SelectionPageComponent },
+  { path: "donemlik-ders-islemleri", component: OgrdonemdersComponent },
+  { path: "hoca", component: LoginhocaComponent },
+  { path: "hoca-home", component: SelectionpagehocaComponent },
+  { path: "hoca-donemlik-ders-islemi", component: HocadonemdersComponent },
 ];
 @NgModule({
   declarations: [
@@ -41,7 +47,9 @@ const routes: Routes = [
     SelectionPageComponent,
     LoginhocaComponent,
     SignuphocaComponent,
-    SelectionpagehocaComponent
+    SelectionpagehocaComponent,
+    OgrdonemdersComponent,
+    HocadonemdersComponent,
   ],
   imports: [
     FormsModule,
@@ -53,9 +61,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { enableTracing: true }),
     FlexLayoutModule,
     MatGridListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { OgrdonemdersComponent } from "../ogrdonemders/ogrdonemders.component";
 
 @Component({
   selector: "app-selection-page",
@@ -15,5 +16,10 @@ export class SelectionPageComponent implements OnInit {
 
   openDevamsızlık() {}
 
-  openDonemDersleri() {}
+  // openDonemDersleri() {
+  //   this.dialog.open(OgrdonemdersComponent, {
+  //     width: "2700px",
+  //     height: "1500px"
+  //   });
+  // }
 }

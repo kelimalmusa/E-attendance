@@ -19,11 +19,4 @@ export class OpenComponent implements OnInit {
       height: "1500px"
     });
   }
-
-  openloginHoca() {
-    this.dialog.open(LoginhocaComponent, {
-      width: "2700px",
-      height: "1500px"
-    });
-  }
 }

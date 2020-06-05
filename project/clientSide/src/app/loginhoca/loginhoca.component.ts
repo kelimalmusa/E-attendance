@@ -48,10 +48,4 @@ export class LoginhocaComponent implements OnInit {
       height: "1500px"
     });
   }
-  openSelectionHoca() {
-    this.dialog.open(SelectionpagehocaComponent, {
-      width: "2700px",
-      height: "1500px"
-    });
-  }
 }

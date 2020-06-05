@@ -51,10 +51,10 @@ export class LoginnComponent implements OnInit {
     });
   }
 
-  openSelection() {
-    this.dialog.open(SelectionPageComponent, {
-      width: "2700px",
-      height: "1500px"
-    });
-  }
+  // openSelection() {
+  //   this.dialog.open(SelectionPageComponent, {
+  //     width: "2700px",
+  //     height: "1500px"
+  //   });
+  // }
 }

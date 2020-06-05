@@ -1,0 +1,43 @@
+mat-grid-tile {
+  background-color: aquamarine;
+  display: inherit !important;
+}
+table {
+  width: 100%;
+}
+
+.left{
+
+  background: url("../../assets/galaxy3.jpg") no-repeat;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+
+
+}
+.right{
+
+  background: url("../../assets/galaxy3.jpg") no-repeat;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+
+
+}
+
+.btn{
+  position: absolute;
+  bottom: 250px;
+  width: 300px;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  border: 8px solid rgb(13, 235, 224);
+  height: 50px;
+  background: none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+
+
+}
