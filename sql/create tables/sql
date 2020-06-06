@@ -1,0 +1,88 @@
+CREATE TABLE public.ders (
+	ders_id serial8 NOT NULL,
+	ders_code varchar NULL,
+	ders_name varchar NULL,
+	ders_sube varchar NULL,
+	ders_haftalik_saat int NULL,
+	ders_uygulama boolean NULL,
+	ders_baslangic_saat varchar NULL,
+	ders_hoca_id int8 NULL,
+	ders_salon varchar NULL,
+	CONSTRAINT ders_pk PRIMARY KEY (id),
+	CONSTRAINT ders_un UNIQUE (id)
+);
+
+
+
+
+CREATE TABLE public.hoca (
+	hoca_id serial8 NOT NULL,
+	hoca_name varchar NULL,
+	hoca_surname varchar NULL,
+	hoca_title varchar NULL,
+	hoca_username varchar NULL,
+	hoca_email varchar NULL,
+	hoca_password varchar NULL,
+	CONSTRAINT hoca_pk PRIMARY KEY (hoca_id),
+	CONSTRAINT hoca_un UNIQUE (hoca_id)
+);
+
+
+
+
+CREATE TABLE public.ogrenci (
+	ogr_id serial8 NOT NULL,
+	ogr_no varchar NULL,
+	ogr_name varchar NULL,
+	ogr_surname varchar NULL,
+	ogr_ogrenim_turu varchar NULL,
+	ogr_user_id varchar NULL,
+	ogr_username varchar NULL,
+	ogr_password varchar NULL,
+	ogr_email varchar NULL,
+	CONSTRAINT ogrenci_pk PRIMARY KEY (ogr_id),
+	CONSTRAINT ogrenci_un UNIQUE (ogr_id)
+);
+
+
+
+
+
+CREATE TABLE public.tweet (
+	id serial8 NOT NULL,
+	tweet json NULL,
+	ogr_id int8 NULL,
+	ders_id int8 NULL,
+	tarih varchar NULL,
+	CONSTRAINT tweet_pk PRIMARY KEY (id),
+	CONSTRAINT tweet_un UNIQUE (id)
+);
+
+
+
+
+
+CREATE TABLE public.devamsizlik (
+	id serial8 NOT NULL,
+	ogr_id int8 NULL,
+	ders_id int8 NULL,
+	tweet_id int8 NULL,
+	islem_location varchar NULL,
+	islem_tarih varchar NULL,
+	islem_gecerlilik boolean NULL
+	CONSTRAINT devamsizlik_pk PRIMARY KEY (id),
+	CONSTRAINT devamsizlik_un UNIQUE (id)
+);
+
+
+
+
+CREATE TABLE public.ogrenci_kayit (
+	id serial8 NOT NULL,
+	ogr_id int8 NULL,
+	ders_id int8 NULL,
+	kayit_tarih varchar NULL,
+	CONSTRAINT ogrenci_kayit_pk PRIMARY KEY (id),
+	CONSTRAINT ogrenci_kayit_un UNIQUE (id)
+);
+
