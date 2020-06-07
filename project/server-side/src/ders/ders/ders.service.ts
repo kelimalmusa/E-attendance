@@ -74,9 +74,6 @@ export class DersService {
   }
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (this.dbs.getPool()) console.log("pooool var");
-      else console.log("poool yok");
-
       this.dbs
         .getPool()
         .query("select * from ders")
@@ -109,7 +106,7 @@ export class DersService {
           return resolve();
         })
         .catch((e) => {
-          console.log("Service",e);
+          console.log("Service", e);
           return reject(e);
         });
     });
