@@ -26,7 +26,11 @@ import { Routes, RouterModule } from "@angular/router";
 import { MainComponent } from "./main/main.component";
 import { OgrdonemdersComponent } from "./ogrdonemders/ogrdonemders.component";
 import { HocadonemdersComponent } from "./hocadonemders/hocadonemders.component";
-
+import { OgrdevamdurumuComponent } from "./ogrdevamdurumu/ogrdevamdurumu.component";
+import { ListOgrDevamDurumComponent } from "./list-ogr-devam-durum/list-ogr-devam-durum.component";
+import { HocadevamdurumuComponent } from "./hocadevamdurumu/hocadevamdurumu.component";
+import { ListHocaDevamDurumComponent } from "./list-hoca-devam-durum/list-hoca-devam-durum.component";
+import { DetaillistHocaDevamDurumuComponent } from "./detaillist-hoca-devam-durumu/detaillist-hoca-devam-durumu.component";
 const routes: Routes = [
   { path: "student", component: LoginnComponent },
   { path: "", component: OpenComponent },
@@ -35,6 +39,7 @@ const routes: Routes = [
   { path: "hoca", component: LoginhocaComponent },
   { path: "hoca-home", component: SelectionpagehocaComponent },
   { path: "hoca-donemlik-ders-islemi", component: HocadonemdersComponent },
+  { path: "devamsizlik-bilgisi", component: OgrdevamdurumuComponent },
 ];
 @NgModule({
   declarations: [
@@ -50,6 +55,11 @@ const routes: Routes = [
     SelectionpagehocaComponent,
     OgrdonemdersComponent,
     HocadonemdersComponent,
+    OgrdevamdurumuComponent,
+    ListOgrDevamDurumComponent,
+    HocadevamdurumuComponent,
+    ListHocaDevamDurumComponent,
+    DetaillistHocaDevamDurumuComponent,
   ],
   imports: [
     FormsModule,

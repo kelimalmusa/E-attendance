@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { OgrdonemdersComponent } from "../ogrdonemders/ogrdonemders.component";
+import { OgrdevamdurumuComponent } from "../ogrdevamdurumu/ogrdevamdurumu.component";
 
 @Component({
   selector: "app-selection-page",
