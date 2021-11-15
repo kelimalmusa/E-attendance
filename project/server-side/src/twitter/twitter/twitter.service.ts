@@ -2,10 +2,10 @@ import { Injectable } from "@nestjs/common";
 import * as twit from "twit";
 import { QueryResult } from "pg";
 export const Twitter = new twit({
-  consumer_key: "QrSELxABo1TSwl0Bpr6DV9VK4",
-  consumer_secret: "yFsBhyYfVhenZwjLw5Okl2PdTWGjUH8czLGlCfnYabVlwLr8fp",
-  access_token: "1259478528-FyebKFry33MmmearEhcD0Wy2ZU9ZkS9D54Gysth",
-  access_token_secret: "btWJMbmDXndutbZAdVuHqP3LPJM7R5x9gFtk0JhjxiCm2",
+  consumer_key: "",
+  consumer_secret: "",
+  access_token: "",
+  access_token_secret: "",
   timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
   strictSSL: true // optional - requires SSL certificates to be valid.
 });
